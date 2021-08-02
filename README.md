@@ -1,5 +1,7 @@
 # game
 
+https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3OFZqdlR5eTEyajA5MzdqbkY4UHBXYm9UbjFseHwzMDc0NDU3MzQ5MDY1MjA0NDM0
+
 🕒 Время средней игры 5-10 минут
 
 Сложность для ознакомления низкая 🟢
