@@ -4,6 +4,7 @@
   "description": "https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3OFZqdlR5eTEyajA5MzdqbkY4UHBXYm9UbjFseHwzMDc0NDU3MzQ5MDY1MjA0NDM0",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run watch:css && webpack serve",
     "build": "npm run watch:css && webpack",
@@ -49,6 +50,7 @@
     "html-loader": "2.1.2",
     "html-webpack-plugin": "5.3.2",
     "husky": "7.0.1",
+    "jsonlint": "^1.6.3",
     "lint-staged": "11.1.1",
     "nrun": "1.0.0",
     "postcss-cli": "8.3.1",
@@ -56,11 +58,6 @@
     "tailwindcss": "2.2.7",
     "ts-loader": "9.2.5",
     "typescript": "4.3.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --quiet"
-    }
   },
   "lint-staged": {
     "*.json": "jsonlint",
