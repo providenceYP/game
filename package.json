@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve",
-    "build": "webpack",
+    "dev": "npm run watch:css && webpack serve",
+    "build": "npm run watch:css && webpack",
+    "watch:css": "postcss ./src/tailwind.css -o ./src/index.css",
+    "sync": "npm prune && npm install",
     "lint": "lint-staged"
   },
   "repository": {
@@ -20,51 +22,48 @@
   },
   "homepage": "https://github.com/providenceYP/game#readme",
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0",
-    "webpack": "^5.48.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router-dom": "5.2.0",
+    "webpack": "5.48.0",
+    "webpack-cli": "4.7.2",
+    "webpack-dev-server": "3.11.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.14.9",
-    "@babel/preset-typescript": "^7.14.5",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.1.8",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^6.2.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "2.22.0",
+    "@babel/preset-env": "7.14.9",
+    "@babel/preset-typescript": "7.14.5",
+    "@types/react": "17.0.16",
+    "@types/react-dom": "17.0.9",
+    "@types/react-router-dom": "5.1.8",
+    "@typescript-eslint/eslint-plugin": "4.29.0",
+    "@typescript-eslint/parser": "4.29.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-typescript": "12.3.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jsx-a11y": "6.3.1",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.20.6",
     "eslint-plugin-react-hooks": "4.0.8",
-    "file-loader": "^6.2.0",
-    "html-loader": "^2.1.2",
-    "html-webpack-plugin": "^5.3.2",
-    "lint-staged": "^11.1.1",
-    "nrun": "^1.0.0",
-    "prettier": "^2.3.2",
-    "sass": "^1.32.8",
-    "sass-loader": "^12.1.0",
-    "style-loader": "^3.2.1",
-    "stylelint": "13.6.1",
-    "stylelint-config-dvpnt": "1.4.0",
-    "ts-loader": "^9.2.4",
-    "typescript": "^4.3.5"
+    "file-loader": "6.2.0",
+    "html-loader": "2.1.2",
+    "html-webpack-plugin": "5.3.2",
+    "husky": "7.0.1",
+    "lint-staged": "11.1.1",
+    "nrun": "1.0.0",
+    "postcss-cli": "8.3.1",
+    "prettier": "2.3.2",
+    "tailwindcss": "2.2.7",
+    "ts-loader": "9.2.5",
+    "typescript": "4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --quiet"
+    }
   },
   "lint-staged": {
     "*.json": "jsonlint",
-    "*.{js,jsx,ts,tsx}": "eslint --quiet",
-    "*.scss": "stylelint --syntax scss"
+    "*.{ts,tsx}": "eslint --quiet"
   }
 }

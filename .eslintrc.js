@@ -2,12 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const prettierOptions = JSON.parse(
-	fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
+	fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8')
 );
 
 module.exports = {
-	parser: 'babel-eslint',
-	extends: ['airbnb', 'prettier', 'prettier/react', 'plugin:@typescript-eslint/recommended'],
+	extends: ['airbnb-typescript', 'prettier', 'plugin:@typescript-eslint/recommended'],
 	plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', '@typescript-eslint'],
 	env: {
 		jest: true,
@@ -16,12 +15,14 @@ module.exports = {
 		es6: true,
 	},
 	parserOptions: {
-		ecmaVersion: 6,
+		ecmaVersion: 9,
 		sourceType: 'module',
 		ecmaFeatures: {
 			jsx: true,
 		},
+    project: './tsconfig.json'
 	},
+  parser: '@typescript-eslint/parser',
 	rules: {
 		'prettier/prettier': ['error', prettierOptions],
 		'arrow-body-style': [2, 'as-needed'],
@@ -34,6 +35,7 @@ module.exports = {
 		'import/no-unresolved': 2,
 		'import/no-webpack-loader-syntax': 0,
 		'import/prefer-default-export': 0,
+    '@typescript-eslint/no-var-requires': 0,
 		indent: [
 			2,
 			2,
@@ -76,12 +78,14 @@ module.exports = {
 		'react/self-closing-comp': 0,
 		'react/sort-comp': 0,
 		'require-yield': 0,
+    'react-hooks/exhaustive-deps': 'warn'
 	},
 	settings: {
 		'import/resolver': {
-			webpack: {
-				config: './webpack.config',
-			},
-		},
-	},
+      node: {
+        extensions: ['.ts', '.tsx', '.js'],
+        moduleDirectory: ['node_modules', 'src/']
+      }
+    }
+	}
 };
