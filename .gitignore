@@ -1,0 +1,6 @@
+.cache
+.idea
+node_modules
+dist
+.eslintcache
+src/index.css
