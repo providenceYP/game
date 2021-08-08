@@ -1,10 +1,9 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+const config = {
   mode: 'development',
   entry: './src/index.tsx',
-  devtool: 'inline-source-map',
   output: {
     filename: 'bundle.js',
     path: path.resolve('dist'),
@@ -45,4 +44,12 @@ module.exports = {
     port: 3000,
     hot: true,
   },
+};
+
+module.exports = (env, argv) => {
+  if (!argv.mode || argv.mode === 'development') {
+    config.devtool = 'inline-source-map';
+  }
+
+  return config;
 };

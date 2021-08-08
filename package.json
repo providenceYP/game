@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run watch:css && webpack serve",
-    "build": "npm run watch:css && webpack",
+    "build": "npm run watch:css && webpack --mode=production",
     "watch:css": "postcss ./src/tailwind.css -o ./src/index.css",
     "sync": "npm prune && npm install",
     "lint": "lint-staged"
