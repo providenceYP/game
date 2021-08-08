@@ -10,5 +10,6 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "noImplicitThis": true
-  }
+  },
+  "include": ["./src/utils/custom.d.ts"]
 }

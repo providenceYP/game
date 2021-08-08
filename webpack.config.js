@@ -10,6 +10,9 @@ module.exports = {
     path: path.resolve('dist'),
     publicPath: '/',
   },
+  experiments: {
+    asset: true,
+  },
   module: {
     rules: [
       {
@@ -18,7 +21,7 @@ module.exports = {
       },
       {
         test: /\.svg?$/,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
       {
         test: /\.(ts|tsx)$/,
