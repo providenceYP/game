@@ -2,28 +2,28 @@ const fs = require('fs');
 const path = require('path');
 
 const prettierOptions = JSON.parse(
-	fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8')
 );
 
 module.exports = {
-	extends: ['airbnb-typescript', 'prettier', 'plugin:@typescript-eslint/recommended'],
-	plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', '@typescript-eslint'],
-	env: {
+  extends: ['airbnb-typescript', 'prettier', 'plugin:@typescript-eslint/recommended'],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', '@typescript-eslint'],
+  env: {
     jest: true,
     browser: true,
     node: true,
     es6: true,
-	},
-	parserOptions: {
+  },
+  parserOptions: {
     ecmaVersion: 9,
     sourceType: 'module',
     ecmaFeatures: {
-    	jsx: true,
+      jsx: true,
     },
     project: './tsconfig.json'
-	},
+  },
   parser: '@typescript-eslint/parser',
-	rules: {
+  rules: {
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
@@ -37,22 +37,22 @@ module.exports = {
     'import/prefer-default-export': 0,
     '@typescript-eslint/no-var-requires': 0,
     indent: [
-    	2,
-    	2,
-    	{
+      2,
+      2,
+      {
         SwitchCase: 1,
-    	},
+      },
     ],
     'jsx-a11y/aria-props': 2,
     'jsx-a11y/heading-has-content': 0,
     'jsx-a11y/label-has-associated-control': [
-    	2,
-    	{
+      2,
+      {
         // NOTE: If this error triggers, either disable it or add
         // your custom components, labels and attributes via these options
         // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
         controlComponents: ['Input'],
-    	},
+      },
     ],
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/mouse-events-have-key-events': 2,
@@ -79,13 +79,13 @@ module.exports = {
     'react/sort-comp': 0,
     'require-yield': 0,
     'react-hooks/exhaustive-deps': 'warn'
-	},
-	settings: {
+  },
+  settings: {
     'import/resolver': {
       node: {
         extensions: ['.ts', '.tsx', '.js'],
         moduleDirectory: ['node_modules', 'src/']
       }
     }
-	}
+  }
 };
