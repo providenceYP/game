@@ -9,13 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
 		"noImplicitAny": true,
-		"noImplicitThis": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "types": [
-      "node"
-    ]
+		"noImplicitThis": true
   }
 }
