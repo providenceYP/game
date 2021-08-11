@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "outDir": "./dist/",
     "module": "es6",
     "target": "es5",

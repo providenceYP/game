@@ -19,6 +19,10 @@ const config = {
         use: 'html-loader',
       },
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.svg?$/,
         type: 'asset/resource',
       },
@@ -37,6 +41,9 @@ const config = {
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
