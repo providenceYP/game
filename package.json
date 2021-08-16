@@ -8,9 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run watch:css && webpack serve",
     "build": "npm run watch:css && webpack --mode=production",
-    "watch:css": "postcss ./src/tailwind.css -o ./src/index.css",
+    "watch:css": "postcss ./src/tailwind.css -o ./www/index.css",
     "sync": "npm prune && npm install",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "lintFix": "eslint --quiet --fix --ext ts,tsx -- './'"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,6 @@
     "react-router-dom": "5.2.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.14.9",
-    "@babel/preset-typescript": "7.14.5",
     "@types/react": "17.0.16",
     "@types/react-dom": "17.0.9",
     "@types/react-router-dom": "5.1.8",
