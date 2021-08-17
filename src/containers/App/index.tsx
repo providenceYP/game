@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from '../../scenes/HomePage';
+import GameScreen from '../../pages/GameScreen/GameScreen';
 
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/" component={GameScreen} />
     </Switch>
   );
 }

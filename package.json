@@ -10,7 +10,8 @@
     "build": "npm run watch:css && webpack --mode=production",
     "watch:css": "postcss ./src/tailwind.css -o ./src/index.css",
     "sync": "npm prune && npm install",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"
   },
   "repository": {
     "type": "git",
