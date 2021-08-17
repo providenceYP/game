@@ -11,7 +11,7 @@
     "watch:css": "postcss ./src/tailwind.css -o ./www/index.css",
     "sync": "npm prune && npm install",
     "lint": "lint-staged",
-    "lintFix": "eslint --quiet --fix --ext ts,tsx -- './'"
+    "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"
   },
   "repository": {
     "type": "git",

@@ -21,7 +21,10 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "declaration": false,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "src/*"]
+    }
   },
   "include": [
     "src",

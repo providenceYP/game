@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Game: React.FC = () => <div>Game</div>;
+const Game = (): JSX.Element => <div>Game</div>;
 
 export default Game;

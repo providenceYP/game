@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Signup: React.FC = () => <div>Signup</div>;
+const Signup = (): JSX.Element => <div>Signup</div>;
 
 export default Signup;

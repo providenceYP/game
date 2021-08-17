@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Profile: React.FC = () => <div>Profile</div>;
+const Profile = (): JSX.Element => <div>Profile</div>;
 
 export default Profile;

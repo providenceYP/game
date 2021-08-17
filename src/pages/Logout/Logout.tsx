@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Logout: React.FC = () => <div>Logout</div>;
+const Logout = (): JSX.Element => <div>Logout</div>;
 
 export default Logout;
