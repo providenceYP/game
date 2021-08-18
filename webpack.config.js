@@ -29,11 +29,7 @@ const config = {
       },
     ],
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: 'src/index.html',
-    }),
-  ],
+  plugins: [new HTMLWebpackPlugin({ template: './www/index.html' })],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
@@ -43,6 +39,8 @@ const config = {
     compress: true,
     port: 3000,
     hot: true,
+    open: true,
+    historyApiFallback: true,
   },
 };
 
