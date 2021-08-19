@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { IEntity } from '../Entity/IEntity';
 import { Tile } from '../Tile/Tile';
 
