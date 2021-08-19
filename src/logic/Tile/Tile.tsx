@@ -18,8 +18,6 @@ export class Tile extends Entity {
     public yInside: number,
   ) {
     super(ctx, x, y, width, height);
-    // this.colorBorder;
-    // this.colorInside,
   }
 
   init(): void {

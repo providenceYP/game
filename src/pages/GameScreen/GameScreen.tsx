@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameComponent } from '../../components/Game/index';
+import { GameComponent } from '../../logic/Game/index';
 import PlayerCard from '../../components/PlayerCard/PlayerCard';
 
 export default function GameScreen() {
