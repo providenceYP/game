@@ -1,8 +1,9 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-const config = {
+module.exports = (argv) => ({
   mode: 'development',
+  devtool: 'inline-source-map',
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
@@ -27,27 +28,33 @@ const config = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1
+            }
+          },
+          "postcss-loader"
+        ]
+      },
     ],
   },
   plugins: [new HTMLWebpackPlugin({ template: './www/index.html' })],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+    },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 3000,
+    historyApiFallback: true,
     hot: true,
     open: true,
     historyApiFallback: true,
   },
-};
-
-module.exports = (env, argv) => {
-  if (!argv.mode || argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-  }
-
-  return config;
-};
+});
