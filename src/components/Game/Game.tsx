@@ -7,6 +7,8 @@ export default class Game {
 	public height = 778;
 	public startX = 20;
 	public startY = 10;
+	public squareSize = 64;
+	public squareInnerSize = this.squareSize - 2;
 
 	protected entities: IEntity[] = [];
 
@@ -23,14 +25,14 @@ export default class Game {
 	}
 
 	initEntities(): void {
-		this.addEntity(new Tile(this.ctx, 64, 64, this.startX, this.startY, '#000000', '#ffffff', 62, 62, this.startX + 1, this.startY + 1));
+		this.addEntity(new Tile(this.ctx, this.squareSize, this.squareSize, this.startX, this.startY, '#000000', '#ffffff', this.squareInnerSize, this.squareInnerSize, this.startX + 1, this.startY + 1));
 		for (let i=0; i<= 15; i++) {
-			this.addEntity(new Tile(this.ctx, 64, 64, this.startX + 64 * i, this.startY, '#000000', '#ffffff', 62, 62, this.startX + 1 + 64 * i, this.startY + 1));
-			this.addEntity(new Tile(this.ctx, 64, 64, this.startX + 64 * i, this.startY + 64 * 11, '#000000', '#ffffff', 62, 62, this.startX + 1 + 64 * i, this.startY + 1 + 64 * 11));
+			this.addEntity(new Tile(this.ctx, this.squareSize, this.squareSize, this.startX + this.squareSize * i, this.startY, '#000000', '#ffffff', this.squareInnerSize, this.squareInnerSize, this.startX + 1 + this.squareSize * i, this.startY + 1));
+			this.addEntity(new Tile(this.ctx, this.squareSize, this.squareSize, this.startX + this.squareSize * i, this.startY + this.squareSize * 11, '#000000', '#ffffff', this.squareInnerSize, this.squareInnerSize, this.startX + 1 + this.squareSize * i, this.startY + 1 + this.squareSize * 11));
 		}
 		for (let i=1; i<= 12; i++) {
-			this.addEntity(new Tile(this.ctx, 64, 64, this.startX, this.startY + 64 * i, '#000000', '#ffffff', 62, 62, this.startX + 1, this.startY + 1 + 64 * i));
-			this.addEntity(new Tile(this.ctx, 64, 64, this.startX + 64 * 15, this.startY + 64 * i, '#000000', '#ffffff', 62, 62, this.startX + 1 + 64 * 15, this.startY + 1 + 64 * i));
+			this.addEntity(new Tile(this.ctx, this.squareSize, this.squareSize, this.startX, this.startY + this.squareSize * i, '#000000', '#ffffff', this.squareInnerSize, this.squareInnerSize, this.startX + 1, this.startY + 1 + this.squareSize * i));
+			this.addEntity(new Tile(this.ctx, this.squareSize, this.squareSize, this.startX + this.squareSize * 15, this.startY + this.squareSize * i, '#000000', '#ffffff', this.squareInnerSize, this.squareInnerSize, this.startX + 1 + this.squareSize * 15, this.startY + 1 + this.squareSize * i));
 		}
 	}
 
