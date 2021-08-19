@@ -1,7 +1,5 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const tailwindcss = require('tailwindcss')
-const autoprefixer = require('autoprefixer') // help tailwindcss to work
 
 module.exports = (argv) => ({
   mode: 'development',
@@ -45,11 +43,7 @@ module.exports = (argv) => ({
       },
     ],
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: 'src/index.html',
-    }),
-  ],
+  plugins: [new HTMLWebpackPlugin({ template: './www/index.html' })],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
@@ -60,5 +54,7 @@ module.exports = (argv) => ({
   devServer: {
     historyApiFallback: true,
     hot: true,
+    open: true,
+    historyApiFallback: true,
   },
 });
