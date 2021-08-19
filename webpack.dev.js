@@ -1,8 +1,11 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const tailwindcss = require('tailwindcss')
+const autoprefixer = require('autoprefixer') // help tailwindcss to work
 
-const config = {
+module.exports = (argv) => ({
   mode: 'development',
+  devtool: 'inline-source-map',
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
@@ -19,10 +22,6 @@ const config = {
         use: 'html-loader',
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
         test: /\.svg?$/,
         type: 'asset/resource',
       },
@@ -30,6 +29,19 @@ const config = {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1
+            }
+          },
+          "postcss-loader"
+        ]
       },
     ],
   },
@@ -46,17 +58,7 @@ const config = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 3000,
+    historyApiFallback: true,
     hot: true,
   },
-};
-
-module.exports = (env, argv) => {
-  if (!argv.mode || argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-  }
-
-  return config;
-};
+});

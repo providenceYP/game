@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './Button.css';
-
 type Props = {
-  onPress?: () => {} | null;
+  onClick?: () => void | null;
   children: React.ReactNode;
+  className?: string;
+  type?: "button" | "submit" | "reset";
 };
 
-export const Button: React.FC<Props> = ({ children, onPress = null }: Props) => (
-  <button className="button" onClick={onPress}>{children}</button>
+export const Button: React.FC<Props> = ({ children, onClick = null, className, type = 'button'}: Props) => (
+  <button className={className} type={type} onClick={onClick}>{children}</button>
 );
