@@ -1,4 +1,4 @@
 export type Props = {
-  image?: string;
+  src?: string;
   className?: string;
 };

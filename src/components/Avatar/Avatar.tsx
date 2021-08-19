@@ -2,8 +2,10 @@ import React from 'react';
 
 import { Props } from './types';
 
-const Avatar = ({ image }: Props): JSX.Element => (
-  <div className="bg-gray-100 h-9 w-9 rounded-full flex justify-center items-center overflow-hidden">
+const Avatar = ({ image, className }: Props): JSX.Element => (
+  <div
+    className={`bg-gray-100 h-9 w-9 rounded-full flex justify-center items-center overflow-hidden ${className}`}
+  >
     {image ? (
       <div
         style={{ backgroundImage: `url(${image})` }}

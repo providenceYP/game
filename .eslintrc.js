@@ -84,7 +84,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.ts', '.tsx', '.js'],
-        moduleDirectory: ['node_modules', 'src/']
+        moduleDirectory: ['node_modules', 'src', '']
       }
     }
   }
