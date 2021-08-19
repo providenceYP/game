@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import {
-  Main,
+  Home,
   Signup,
   Login,
   Logout,
@@ -15,7 +15,7 @@ import {
 
 const App = (): JSX.Element => (
   <Switch>
-    <Route exact path="/" component={Main} />
+    <Route exact path="/" component={Home} />
     <Route path="/signup" component={Signup} />
     <Route path="/login" component={Login} />
     <Route path="/logout" component={Logout} />

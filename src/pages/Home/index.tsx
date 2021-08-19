@@ -1,15 +1,15 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {ChangeEvent, SyntheticEvent, useState} from 'react';
 
-import Navbar from '@/components/Navbar';
-import Form from '@/components/Form';
-import BaseInput from "@/components/BaseInput";
-import Button from "@/components/Button";
+import Navbar from 'components/Navbar';
+import Form from 'components/Form';
+import BaseInput from "components/BaseInput";
+import Button from "components/Button";
 
 const HomePage: React.FC = () => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const handleLogin = (e: SyntheticEvent<Element, InputEvent>) => setLogin(e.target.value);
-  const handlePassword = (e: SyntheticEvent<Element, InputEvent>) => setPassword(e.target.value);
+  const handleLogin = (e: ChangeEvent<HTMLInputElement>) => setLogin(e.target.value);
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
   const onSubmit = () => {};
 
   return (

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Button from '@/components/Button';
-import Logo from '@/components/Logo';
+import Button from 'components/Button';
+import Logo from 'components/Logo';
 
 export const Navbar: React.FC = () => {
   const [isVisible, setNavbar] = useState(true);
