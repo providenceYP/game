@@ -1,7 +1,4 @@
 import { Entity } from '../Entity/Entity';
-// import Game from '../Game/Game';
-// import { IEntity } from '../Entity/IEntity';
-// import { Position } from '../../utils/Position';
 
 export class Tile extends Entity {
   constructor(

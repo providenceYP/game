@@ -1,5 +1,6 @@
-import { IEntity } from '../Entity/IEntity';
+import { Props } from '../Entity/types';
 import { Tile } from '../Tile/Tile';
+
 
 export default class Game {
 	protected ctx: CanvasRenderingContext2D;
@@ -10,7 +11,7 @@ export default class Game {
 	public squareSize = 64;
 	public squareInnerSize = this.squareSize - 2;
 
-	protected entities: IEntity[] = [];
+	protected entities: Props[] = [];
 
 	constructor(protected canvas: HTMLCanvasElement) {
 		this.ctx = canvas.getContext('2d');
@@ -36,7 +37,7 @@ export default class Game {
 		}
 	}
 
-	addEntity(entity: IEntity) {
+	addEntity(entity: Props) {
 		this.entities.push(entity);
 		entity.init();
 	}

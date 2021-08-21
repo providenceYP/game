@@ -1,7 +1,7 @@
-import { IEntity } from './IEntity';
+import { Props } from './types';
 import { Position } from '../../utils/Position';
 
-export abstract class Entity extends Position implements IEntity {
+export abstract class Entity extends Position implements Props {
 	public initialX: number;
 	public initialY: number;
 

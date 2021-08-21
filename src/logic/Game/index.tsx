@@ -1,8 +1,6 @@
 import React,  { Component, createRef } from 'react';
 import Game from './Game';
-
-interface Props {}
-interface State {}
+import { Props, State } from './types';
 
 export class GameComponent extends Component<Props, State> {
 	state = {};

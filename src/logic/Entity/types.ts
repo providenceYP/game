@@ -1,4 +1,4 @@
-export interface IEntity {
+export type Props = {
 	ctx: CanvasRenderingContext2D;
 	x: number;
 	y: number;
@@ -9,7 +9,4 @@ export interface IEntity {
 
 	update?(): void;
 
-	destroy?(): void;
-
-	handleCollision?(entity: IEntity): void;
 }

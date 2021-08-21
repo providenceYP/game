@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Props } from './types';
 
-interface IPlayer {
-  color: string;
-  name: string;
-  playerType: string;
-  playerHealth: string;
-}
-
-export default function PlayerCard(props: IPlayer) {
+export default function PlayerCard(props: Props) {
   const [readyStatus, setReadyStatus] = useState(false);
   useEffect(() => {
     if (props.playerType === 'bot') {
