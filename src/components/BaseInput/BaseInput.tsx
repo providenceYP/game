@@ -1,4 +1,4 @@
-import React, {SyntheticEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 
 type Props = {
   type?: string;
@@ -6,10 +6,17 @@ type Props = {
   className?: string;
   placeholder: string;
   required?: boolean;
-  onChange: (e: SyntheticEvent) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const BaseInput: React.FC<Props> = ({ onChange, placeholder, required = false, value, type = 'text', className = '' }: Props) => (
+export const BaseInput: React.FC<Props> = ({
+  onChange,
+  placeholder,
+  required = false,
+  value,
+  type = 'text',
+  className = '',
+}: Props) => (
   <div className={className}>
     <input
       className="
@@ -18,7 +25,6 @@ export const BaseInput: React.FC<Props> = ({ onChange, placeholder, required = f
         placeholder-gray-400
         text-gray-600
         relative
-        bg-white
         bg-white
         rounded
         text-sm
@@ -37,4 +43,3 @@ export const BaseInput: React.FC<Props> = ({ onChange, placeholder, required = f
     />
   </div>
 );
-
