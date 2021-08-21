@@ -47,9 +47,6 @@ module.exports = (argv) => ({
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
-    alias: {
-      '@': path.resolve(__dirname, 'src/'),
-    },
   },
   devServer: {
     historyApiFallback: true,

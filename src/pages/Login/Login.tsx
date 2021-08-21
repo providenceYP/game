@@ -30,7 +30,7 @@ const Login: React.FC = (): ReactElement => {
   };
 
   return (
-    <>
+    <div className="h-screen flex flex-col">
       <Navbar />
       <main className="flex flex-1 justify-center items-center">
         <Form
@@ -78,7 +78,7 @@ const Login: React.FC = (): ReactElement => {
           />
         </Form>
       </main>
-    </>
+    </div>
   );
 };
 
