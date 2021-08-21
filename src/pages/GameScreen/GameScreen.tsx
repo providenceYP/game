@@ -3,14 +3,19 @@ import { GameComponent } from '../../logic/Game/index';
 import PlayerCard from '../../components/PlayerCard/PlayerCard';
 
 export default function GameScreen() {
+  enum PlayerType {
+    bot="bot",
+    player="player",
+    name="Jason",
+ }
   return (
     <div style={{ display: 'flex' }}>
       <div>
 
         <PlayerCard
           color="bg-green-300"
-          name="Jason"
-          playerType="player"
+          name={PlayerType.name}
+          playerType={PlayerType.player}
           playerHealth="❤️ 100"
         />
 
