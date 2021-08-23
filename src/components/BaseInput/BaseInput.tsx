@@ -1,13 +1,5 @@
-import React, { ChangeEvent } from 'react';
-
-type Props = {
-  type?: string;
-  value: string;
-  className?: string;
-  placeholder: string;
-  required?: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+import React from 'react';
+import { Props } from './types';
 
 export const BaseInput: React.FC<Props> = ({
   onChange,

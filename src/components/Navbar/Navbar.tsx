@@ -3,9 +3,9 @@ import Button from 'components/Button';
 import Logo from 'components/Logo';
 
 export const Navbar: React.FC = () => {
-  const [isVisible, setNavbar] = useState(true);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
   const toggle = () => {
-    setNavbar(!isVisible);
+    setIsVisible((state: boolean) => !state);
   };
 
   return (
@@ -34,37 +34,32 @@ export const Navbar: React.FC = () => {
             <div className="flex flex-col md:flex-row md:mx-6">
               <Button
                 className="
-                text-blue-600
-                background-transparent
-                font-bold uppercase
-                px-3
-                py-1
-                text-xs
-                outline-none
-                mr-1
-            "
+                  text-blue-600
+                  background-transparent
+                  font-bold uppercase
+                  px-3
+                  py-1
+                  text-xs
+                  outline-none
+                  mr-1
+                "
+                link
+                to="login"
               >
                 Вход
               </Button>
               <Button
                 className="
-                  bg-blue-600
-                  text-white
-                  active:bg-purple-600
-                  font-bold
-                  uppercase
+                text-blue-600
+                  background-transparent
+                  font-bold uppercase
+                  px-3
+                  py-1
                   text-xs
-                  px-4
-                  py-2
-                  rounded
-                  shadow
-                  hover:shadow-md
                   outline-none
-                  focus:outline-none
-                  ease-linear
-                  transition-all
-                  duration-150
-              "
+                "
+                link
+                to="signup"
               >
                 Регистрация
               </Button>

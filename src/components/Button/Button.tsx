@@ -1,21 +1,21 @@
 import React from 'react';
-
-type ButtonType = 'button' | 'submit' | 'reset';
-
-type Props = {
-  onClick?: () => void;
-  children: React.ReactNode;
-  className?: string;
-  type?: ButtonType;
-};
+import { NavLink } from 'react-router-dom';
+import { Props } from './types';
 
 export const Button: React.FC<Props> = ({
   children,
   onClick,
   className,
   type = 'button',
-}: Props) => (
-  <button className={className} type={type} onClick={onClick}>
-    {children}
-  </button>
-);
+  link = false,
+  to = '',
+}: Props) =>
+  link ? (
+    <NavLink className={className} type={type} to={to}>
+      {children}
+    </NavLink>
+  ) : (
+    <button className={className} type={type} onClick={onClick}>
+      {children}
+    </button>
+  );

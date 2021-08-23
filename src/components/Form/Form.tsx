@@ -1,12 +1,5 @@
-import React, { ReactNode, FormEvent } from 'react';
-
-type Props = {
-  children: ReactNode;
-  actions: ReactNode[];
-  title?: string;
-  onSubmit: (e: FormEvent) => void;
-  onReset?: () => void;
-};
+import React from 'react';
+import { Props } from './types';
 
 export const Form: React.FC<Props> = ({
   children,

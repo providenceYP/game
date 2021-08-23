@@ -3,3 +3,8 @@
   padding: 10px 13px;
   border-radius: 8px;
 }
+
+.logo svg {
+  width: 53px;
+  height: 32px;
+}

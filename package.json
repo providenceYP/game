@@ -5,8 +5,8 @@
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve --config ./webpack.dev.js",
-    "build": "npm run watch:css && webpack --mode=production",
+    "dev": "webpack serve",
+    "build": "webpack --mode=production",
     "sync": "npm prune && npm install",
     "lint": "lint-staged",
     "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"

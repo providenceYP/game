@@ -3,15 +3,7 @@ import Navbar from 'components/Navbar';
 import Form from 'components/Form';
 import BaseInput from 'components/BaseInput';
 import Button from 'components/Button';
-
-type FormType = {
-  firstName: string;
-  secondName: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-};
+import { FormType } from './types';
 
 const Signup: React.FC = (): ReactElement => {
   const [fields, handleChange] = useState<FormType>({

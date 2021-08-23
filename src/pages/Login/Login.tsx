@@ -3,11 +3,7 @@ import Navbar from 'components/Navbar';
 import Form from 'components/Form';
 import BaseInput from 'components/BaseInput';
 import Button from 'components/Button';
-
-type FormType = {
-  login: string;
-  password: string;
-};
+import { FormType } from './types';
 
 const Login: React.FC = (): ReactElement => {
   const [fields, handleChange] = useState<FormType>({
