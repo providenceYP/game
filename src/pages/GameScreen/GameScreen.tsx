@@ -1,13 +1,9 @@
 import React from 'react';
 import GameComponent from 'logic/Game/index';
 import PlayerCard from 'components/PlayerCard/PlayerCard';
+import { PlayerType } from './types';
 
 export default function GameScreen() {
-  enum PlayerType {
-    bot = 'bot',
-    player = 'player',
-    name = 'Jason',
-  }
   return (
     <div style={{ display: 'flex' }}>
       <div>
