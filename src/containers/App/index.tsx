@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import GameScreen from '../../pages/GameScreen/GameScreen';
+import GameScreen from 'pages/GameScreen/GameScreen';
 
 function App() {
   return (

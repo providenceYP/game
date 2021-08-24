@@ -1,6 +1,6 @@
 import React from 'react';
-import GameComponent from '../../logic/Game/index';
-import PlayerCard from '../../components/PlayerCard/PlayerCard';
+import GameComponent from 'logic/Game/index';
+import PlayerCard from 'components/PlayerCard/PlayerCard';
 
 export default function GameScreen() {
   enum PlayerType {

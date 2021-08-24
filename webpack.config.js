@@ -37,6 +37,12 @@ const config = {
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      pages: path.resolve(__dirname, 'src/pages/'),
+      components: path.resolve(__dirname, 'src/components/'),
+      logic: path.resolve(__dirname, 'src/logic/'),
+      utils: path.resolve(__dirname, 'src/utils/'),
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
