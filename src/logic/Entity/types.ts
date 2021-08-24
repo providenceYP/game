@@ -1,12 +1,11 @@
 export type Props = {
-	ctx: CanvasRenderingContext2D;
-	x: number;
-	y: number;
-	width: number;
-	height: number;
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 
-	init?(): void;
+  init?(): void;
 
-	update?(): void;
-
-}
+  update?(): void;
+};
