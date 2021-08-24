@@ -24,12 +24,14 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 
 базовые параметры игры расположены в src/logic/Game/Game.tsx
 
-    public width - ширина игрового поля;
-	public height - высота игрового поля;
-	public startX - координата по оси X для игрового поля;
-	public startY - координата по оси Y для игрового поля;
-	public squareSize - ширина базового квадрата-ячейки;
-	public squareInnerSize - определяет ширину незакрашенной внутренней части;
+    width - ширина игрового поля;
+	height - высота игрового поля;
+	startX - координата по оси X для игрового поля;
+	startY - координата по оси Y для игрового поля;
+	squareSize - ширина базового квадрата-ячейки;
+	squareInnerSize - определяет ширину незакрашенной внутренней части;
+    horizontalTilesQuantity - количество шагов по горизонтали;
+    verticalTilesQuantity - количество шагов по вертикали;
 
 
 # Скрипты

@@ -16,6 +16,10 @@ export default class Game {
 
   public squareInnerSize = this.squareSize - 2;
 
+  public horizontalTilesQuantity = 15;
+
+  public verticalTilesQuantity = 12;
+
   protected entities: Props[] = [];
 
   constructor(protected canvas: HTMLCanvasElement) {
@@ -46,7 +50,7 @@ export default class Game {
         this.startY + 1,
       ),
     );
-    for (let i = 0; i <= 15; i += 1) {
+    for (let i = 0; i <= this.horizontalTilesQuantity; i += 1) {
       this.addEntity(
         new Tile(
           this.ctx,
@@ -78,7 +82,7 @@ export default class Game {
         ),
       );
     }
-    for (let i = 1; i <= 12; i += 1) {
+    for (let i = 1; i <= this.verticalTilesQuantity; i += 1) {
       this.addEntity(
         new Tile(
           this.ctx,
