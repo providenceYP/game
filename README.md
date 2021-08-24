@@ -20,6 +20,17 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 
 В конце игры вы встречаете своего заклятого врага - вашего бывшего напарника и должны победить его в честной битве - броском кубика.
 
+Конфигурация и параметры игры
+
+базовые параметры игры расположены в src/logic/Game/Game.tsx
+
+    public width - ширина игрового поля;
+	public height - высота игрового поля;
+	public startX - координата по оси X для игрового поля;
+	public startY - координата по оси Y для игрового поля;
+	public squareSize - ширина базового квадрата-ячейки;
+	public squareInnerSize - определяет ширину незакрашенной внутренней части;
+
 
 # Скрипты
 * Установка – npm install
