@@ -1,21 +1,13 @@
-import React,  { Component, createRef } from 'react';
+import React, { useEffect, createRef } from 'react';
 import Game from './Game';
-import { Props, State } from './types';
 
-export class GameComponent extends Component<Props, State> {
-	state = {};
+export default function GameComponent() {
+  const canvas = createRef<HTMLCanvasElement>();
 
-	canvas = createRef<HTMLCanvasElement>();
+  useEffect(() => {
+    const game = new Game(canvas.current);
+    game.init();
+  }, []);
 
-	game: Game;
-
-	componentDidMount() {
-		this.game = new Game(this.canvas.current);
-
-		this.game.init();
-	}
-
-	render() {
-		return <canvas ref={this.canvas}></canvas>;
-	}
+  return <canvas ref={canvas}></canvas>;
 }
