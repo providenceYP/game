@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Logo.css';
 
 export const Logo: React.FC = () => (
-  <a className="logo" href="/">
+  <Link className="logo" to="/">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -27,5 +28,5 @@ export const Logo: React.FC = () => (
         />
       </defs>
     </svg>
-  </a>
+  </Link>
 );

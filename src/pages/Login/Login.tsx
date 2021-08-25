@@ -6,7 +6,7 @@ import Button from 'components/Button';
 import { FormType } from './types';
 
 const Login: React.FC = (): ReactElement => {
-  const [fields, handleChange] = useState<FormType>({
+  const [fields, setFields] = useState<FormType>({
     login: '',
     password: '',
   });
@@ -22,7 +22,14 @@ const Login: React.FC = (): ReactElement => {
       {},
     );
 
-    handleChange(newState as FormType);
+    setFields(newState as FormType);
+  };
+
+  const handleChange = (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+    setFields((values) => ({
+      ...values,
+      [name]: e.target.value,
+    }));
   };
 
   return (
@@ -53,21 +60,14 @@ const Login: React.FC = (): ReactElement => {
           <BaseInput
             className="mb-2"
             value={fields.login}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({ ...values, login: e.target.value }))
-            }
+            onChange={handleChange('login')}
             placeholder="Логин"
             required
           />
           <BaseInput
             className="mb-2"
             value={fields.password}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({
-                ...values,
-                password: e.target.value,
-              }))
-            }
+            onChange={handleChange('password')}
             placeholder="Пароль"
             type="password"
             required

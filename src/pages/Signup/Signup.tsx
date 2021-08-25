@@ -6,7 +6,7 @@ import Button from 'components/Button';
 import { FormType } from './types';
 
 const Signup: React.FC = (): ReactElement => {
-  const [fields, handleChange] = useState<FormType>({
+  const [fields, setFields] = useState<FormType>({
     firstName: '',
     secondName: '',
     login: '',
@@ -20,13 +20,22 @@ const Signup: React.FC = (): ReactElement => {
   };
 
   const resetForm = () => {
-    const formFields = Object.keys(fields);
-    const newState = formFields.reduce(
-      (acc, field) => ({ ...acc, [field]: '' }),
-      {},
-    );
+    setFields((state: FormType): FormType => {
+      const formFields = Object.keys(state);
+      const newState = formFields.reduce(
+        (acc, field) => ({ ...acc, [field]: '' }),
+        {},
+      );
 
-    handleChange(newState as FormType);
+      return newState as FormType;
+    });
+  };
+
+  const handleChange = (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+    setFields((values) => ({
+      ...values,
+      [name]: e.target.value,
+    }));
   };
 
   return (
@@ -57,42 +66,28 @@ const Signup: React.FC = (): ReactElement => {
           <BaseInput
             className="mb-2"
             value={fields.firstName}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({
-                ...values,
-                firstName: e.target.value,
-              }))
-            }
+            onChange={handleChange('firstName')}
             placeholder="Имя"
             required
           />
           <BaseInput
             className="mb-2"
             value={fields.secondName}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({
-                ...values,
-                secondName: e.target.value,
-              }))
-            }
+            onChange={handleChange('secondName')}
             placeholder="Фамилия"
             required
           />
           <BaseInput
             className="mb-2"
             value={fields.login}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({ ...values, login: e.target.value }))
-            }
+            onChange={handleChange('login')}
             placeholder="Логин"
             required
           />
           <BaseInput
             className="mb-2"
             value={fields.email}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({ ...values, email: e.target.value }))
-            }
+            onChange={handleChange('email')}
             placeholder="Почта"
             type="email"
             required
@@ -100,12 +95,7 @@ const Signup: React.FC = (): ReactElement => {
           <BaseInput
             className="mb-2"
             value={fields.password}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({
-                ...values,
-                password: e.target.value,
-              }))
-            }
+            onChange={handleChange('password')}
             placeholder="Пароль"
             type="password"
             required
@@ -113,9 +103,7 @@ const Signup: React.FC = (): ReactElement => {
           <BaseInput
             className="mb-2"
             value={fields.phone}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChange((values) => ({ ...values, phone: e.target.value }))
-            }
+            onChange={handleChange('phone')}
             placeholder="Телефон"
             type="phone"
             required

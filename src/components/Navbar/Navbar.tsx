@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'components/Button';
 import Logo from 'components/Logo';
+import { Link } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -32,37 +33,38 @@ export const Navbar: React.FC = () => {
         {isVisible && (
           <div className="items-center md:flex">
             <div className="flex flex-col md:flex-row md:mx-6">
-              <Button
-                className="
-                  text-blue-600
-                  background-transparent
-                  font-bold uppercase
-                  px-3
-                  py-1
-                  text-xs
-                  outline-none
-                  mr-1
-                "
-                link
-                to="login"
-              >
-                Вход
-              </Button>
-              <Button
-                className="
-                text-blue-600
-                  background-transparent
-                  font-bold uppercase
-                  px-3
-                  py-1
-                  text-xs
-                  outline-none
-                "
-                link
-                to="signup"
-              >
-                Регистрация
-              </Button>
+              <Link to="login">
+                <Button
+                  className="
+                    text-blue-600
+                    background-transparent
+                    font-bold uppercase
+                    px-3
+                    py-1
+                    text-xs
+                    outline-none
+                    mr-1
+                  "
+                >
+                  Вход
+                </Button>
+              </Link>
+              <Link to="signup">
+                <Button
+                  className="
+                  text-white
+                    bg-blue-600
+                    background-transparent
+                    font-bold uppercase
+                    px-3
+                    py-1
+                    text-xs
+                    outline-none
+                  "
+                >
+                  Регистрация
+                </Button>
+              </Link>
             </div>
           </div>
         )}
