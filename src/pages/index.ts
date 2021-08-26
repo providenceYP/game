@@ -7,3 +7,4 @@ export { default as Leaderboard } from './Leaderboard';
 export { default as Forum } from './Forum';
 export { default as Game } from './Game';
 export { default as NotFound } from './NotFound';
+export { default as GameScreen } from './GameScreen';
