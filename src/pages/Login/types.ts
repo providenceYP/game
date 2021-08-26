@@ -1,4 +1,4 @@
-export type FormType = {
+export type LoginFormType = {
   login: string;
   password: string;
 };

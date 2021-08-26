@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Avatar: React.FC = () => (
+export const Avatar: React.FC = (): JSX.Element => (
   <div className="bg-gray-100 border border-gray-300 px-2 py-2 rounded-full">
     <svg
       xmlns="http://www.w3.org/2000/svg"

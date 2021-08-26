@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './Logo.css';
 
-export const Logo: React.FC = () => (
+export const Logo: React.FC = (): JSX.Element => (
   <Link className="logo" to="/">
     <svg
       xmlns="http://www.w3.org/2000/svg"

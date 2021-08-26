@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Props } from './types';
 
 export const Form: React.FC<Props> = ({
@@ -7,7 +8,7 @@ export const Form: React.FC<Props> = ({
   actions,
   onSubmit,
   onReset,
-}: Props) => (
+}: Props): JSX.Element => (
   <form
     onSubmit={onSubmit}
     onReset={onReset}

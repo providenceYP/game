@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import Button from 'components/Button';
-import Logo from 'components/Logo';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
+import Button from 'components/Button';
+import Logo from 'components/Logo';
+
+export const Navbar: React.FC = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const toggle = () => {
+
+  const toggle = useCallback(() => {
     setIsVisible((state: boolean) => !state);
-  };
+  }, [setIsVisible]);
 
   return (
     <nav className="shadow dark:bg-gray-800">

@@ -1,36 +1,41 @@
-import React, { ChangeEvent, useState, ReactElement, FormEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+
 import Navbar from 'components/Navbar';
 import Form from 'components/Form';
 import BaseInput from 'components/BaseInput';
 import Button from 'components/Button';
-import { FormType } from './types';
 
-const Login: React.FC = (): ReactElement => {
-  const [fields, setFields] = useState<FormType>({
+import { LoginFormType } from './types';
+
+const Login: React.FC = (): JSX.Element => {
+  const [fields, setFields] = useState<LoginFormType>({
     login: '',
     password: '',
   });
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
-  };
+  }, []);
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     const formFields = Object.keys(fields);
     const newState = formFields.reduce(
       (acc, field) => ({ ...acc, [field]: '' }),
       {},
     );
 
-    setFields(newState as FormType);
-  };
+    setFields(newState as LoginFormType);
+  }, [fields]);
 
-  const handleChange = (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
-    setFields((values) => ({
-      ...values,
-      [name]: e.target.value,
-    }));
-  };
+  const handleChange = useCallback(
+    (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+      setFields((values) => ({
+        ...values,
+        [name]: e.target.value,
+      }));
+    },
+    [],
+  );
 
   return (
     <div className="h-screen flex flex-col">

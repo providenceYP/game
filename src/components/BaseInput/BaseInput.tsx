@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Props } from './types';
 
 export const BaseInput: React.FC<Props> = ({
@@ -8,7 +9,7 @@ export const BaseInput: React.FC<Props> = ({
   value,
   type = 'text',
   className = '',
-}: Props) => (
+}: Props): JSX.Element => (
   <div className={className}>
     <input
       className="
