@@ -9,8 +9,9 @@ import {
   Profile,
   Leaderboard,
   Forum,
-  Game,
+  // Game,
   NotFound,
+  GameScreen,
 } from 'pages';
 
 const App = (): JSX.Element => (
@@ -22,7 +23,7 @@ const App = (): JSX.Element => (
     <Route path="/profile" component={Profile} />
     <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/forum" component={Forum} />
-    <Route path="/game" component={Game} />
+    <Route path="/game" component={GameScreen} />
     <Route component={NotFound} />
   </Switch>
 );
