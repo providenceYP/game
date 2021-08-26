@@ -8,15 +8,15 @@ export default function GameScreen() {
     <div style={{ display: 'flex' }}>
       <div>
         <PlayerCard
-          color="bg-green-300"
-          name={PlayerType.name}
+          color={PlayerType.green}
+          name="Jason"
           playerType={PlayerType.player}
           playerHealth="❤️ 100"
         />
         <PlayerCard
-          color="bg-red-300"
+          color={PlayerType.red}
           name="Simon"
-          playerType="bot"
+          playerType={PlayerType.bot}
           playerHealth="❤️ 100"
         />
       </div>

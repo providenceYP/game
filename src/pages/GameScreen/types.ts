@@ -1,5 +1,6 @@
 export enum PlayerType {
   bot = 'bot',
   player = 'player',
-  name = 'Jason',
+  green = 'bg-green-300',
+  red = 'bg-red-300',
 }
