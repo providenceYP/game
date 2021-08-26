@@ -27,6 +27,19 @@ const config = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1
+            }
+          },
+          "postcss-loader"
+        ]
+      },
     ],
   },
   plugins: [new HTMLWebpackPlugin({ template: './www/index.html' })],
@@ -41,7 +54,6 @@ const config = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
     hot: true,
