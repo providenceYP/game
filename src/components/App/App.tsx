@@ -9,7 +9,6 @@ import {
   Profile,
   Leaderboard,
   Forum,
-  // Game,
   NotFound,
   GameScreen,
 } from 'pages';

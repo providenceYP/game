@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Avatar from 'components/Avatar';
 import { Props } from './types';
 
 export default function PlayerCard(props: Props) {
@@ -23,10 +24,15 @@ export default function PlayerCard(props: Props) {
     <div
       className={`relative w-48 h-28 mt-10 ml-10 p-4 rounded-2xl bg-opacity-25 ${props.color}`}
     >
-      <p className="font-bold">{props.name}</p>
-      <p className="font-extralight">{props.playerType}</p>
+      <div className="flex items-center">
+        <Avatar />
+        <div className="flex flex-col ml-3">
+          <p className="font-bold">{props.name}</p>
+          <p className="font-extralight">{props.playerType}</p>
+        </div>
+      </div>
       <p className="absolute bottom-0 right-0 pr-4 pb-2">
-        {props.playerHealth}
+        {`❤️ ${props.playerHealth}`}
       </p>
     </div>
   );
