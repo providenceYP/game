@@ -1,8 +1,23 @@
 import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import Button from 'components/Button';
 import Logo from 'components/Logo';
+
+const links = [
+  {
+    url: '/',
+    title: 'Главная',
+  },
+  {
+    url: '/leaderboard',
+    title: 'Таблица лидеров',
+  },
+  {
+    url: '/forum',
+    title: 'Форум',
+  },
+];
 
 export const Navbar: React.FC = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -12,8 +27,8 @@ export const Navbar: React.FC = (): JSX.Element => {
   }, [setIsVisible]);
 
   return (
-    <nav className="shadow dark:bg-gray-800">
-      <div className="container px-6 py-3 mx-auto md:flex md:justify-between md:items-center">
+    <nav className="shadow dark:bg-gray-800 bg-blue-50">
+      <div className="container px-6 py-3 mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
         <div className="flex items-center justify-between">
           <Logo />
 
@@ -33,42 +48,35 @@ export const Navbar: React.FC = (): JSX.Element => {
         </div>
 
         {isVisible && (
-          <div className="items-center md:flex">
-            <div className="flex flex-col md:flex-row md:mx-6">
-              <Link to="login">
-                <Button
-                  className="
-                    text-blue-600
-                    background-transparent
-                    font-bold uppercase
-                    px-3
-                    py-1
-                    text-xs
-                    outline-none
-                    mr-1
-                  "
+          <>
+            <div className="flex flex-col md:flex-row order-last md:order-none">
+              {links.map(({ url, title }) => (
+                <NavLink
+                  to={url}
+                  className="uppercase text-xs font-medium py-2 px-4 bg-white rounded mb-2 md:mr-5 md:mb-0 hover:bg-blue-700 hover:text-white"
+                  activeClassName="text-blue-700"
+                >
+                  {title}
+                </NavLink>
+              ))}
+            </div>
+            <div className="items-center md:flex">
+              <div className="flex flex-col md:flex-row md:mx-6">
+                <Link
+                  to="/login"
+                  className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs mb-2 md:mr-1 md:mb-0 hover:bg-blue-700 hover:text-white"
                 >
                   Вход
-                </Button>
-              </Link>
-              <Link to="signup">
-                <Button
-                  className="
-                  text-white
-                    bg-blue-600
-                    background-transparent
-                    font-bold uppercase
-                    px-3
-                    py-1
-                    text-xs
-                    outline-none
-                  "
+                </Link>
+                <Link
+                  to="/signup"
+                  className="text-blue-700 bg-white font-medium uppercase px-4 py-2 rounded text-xs mb-2 md:mr-1 md:mb-0 hover:bg-blue-700 hover:text-white"
                 >
                   Регистрация
-                </Button>
-              </Link>
+                </Link>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>
