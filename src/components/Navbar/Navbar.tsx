@@ -7,6 +7,7 @@ import Logo from 'components/Logo';
 const links = [
   {
     url: '/',
+    exact: true,
     title: 'Главная',
   },
   {
@@ -50,10 +51,11 @@ export const Navbar: React.FC = (): JSX.Element => {
         {isVisible && (
           <>
             <div className="flex flex-col md:flex-row order-last md:order-none">
-              {links.map(({ url, title }) => (
+              {links.map(({ url, title, exact }) => (
                 <NavLink
                   to={url}
-                  className="uppercase text-xs font-medium py-2 px-4 bg-white rounded mb-2 md:mr-5 md:mb-0 hover:bg-blue-700 hover:text-white"
+                  exact={exact ?? false}
+                  className="uppercase text-xs font-medium py-2 px-4 bg-white rounded my-1 md:mr-5 md:my-0 hover:bg-blue-700 hover:text-white"
                   activeClassName="text-blue-700"
                 >
                   {title}
@@ -64,13 +66,13 @@ export const Navbar: React.FC = (): JSX.Element => {
               <div className="flex flex-col md:flex-row md:mx-6">
                 <Link
                   to="/login"
-                  className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs mb-2 md:mr-1 md:mb-0 hover:bg-blue-700 hover:text-white"
+                  className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
                 >
                   Вход
                 </Link>
                 <Link
                   to="/signup"
-                  className="text-blue-700 bg-white font-medium uppercase px-4 py-2 rounded text-xs mb-2 md:mr-1 md:mb-0 hover:bg-blue-700 hover:text-white"
+                  className="text-blue-700 bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
                 >
                   Регистрация
                 </Link>

@@ -20,7 +20,7 @@ const Leaderboard = (): JSX.Element => {
   ]);
 
   return (
-    <Layout className="bg-gray-50">
+    <Layout className="bg-white">
       <div className="container m-auto max-w-3xl p-8">
         <h1 className="text-gray-600 text-3xl mb-14">Топ-10 лидеров</h1>
         <div className="flex justify-between">
