@@ -1,15 +1,23 @@
 import React from 'react';
+import cn from 'classnames';
 
 import { Props } from './types';
 
-const Avatar = ({ image, className }: Props): JSX.Element => (
+const Avatar = ({
+  image,
+  className,
+  placeholderClassName,
+}: Props): JSX.Element => (
   <div
     className={`bg-gray-100 h-9 w-9 rounded-full flex justify-center items-center overflow-hidden ${className}`}
   >
     {image ? (
       <div
         style={{ backgroundImage: `url(${image})` }}
-        className="bg-center bg-no-repeat bg-cover w-full h-full"
+        className={cn(
+          'bg-center bg-no-repeat bg-cover w-full h-full',
+          className,
+        )}
       />
     ) : (
       <svg
@@ -17,7 +25,10 @@ const Avatar = ({ image, className }: Props): JSX.Element => (
         width="16"
         height="16"
         viewBox="0 0 16 16"
-        className="stroke-current stroke-1  text-gray-400"
+        className={cn(
+          'stroke-current stroke-1  text-gray-400',
+          placeholderClassName,
+        )}
       >
         <path
           d="M13.3333 14V12.6667C13.3333 11.9594 13.0524 11.2811 12.5523 10.781C12.0522 10.281 11.3739 10 10.6667 10H5.33332C4.62608 10 3.9478 10.281 3.4477 10.781C2.94761 11.2811 2.66666 11.9594 2.66666 12.6667V14"
