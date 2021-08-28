@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 
 import { Props } from './types';
 
@@ -9,25 +10,16 @@ export const BaseInput: React.FC<Props> = ({
   value,
   type = 'text',
   className = '',
+  inputClassName = '',
 }: Props): JSX.Element => (
-  <div className={className}>
+  <div
+    className={cn('rounded overflow-hidden border border-gray-400', className)}
+  >
     <input
-      className="
-        px-3
-        py-3
-        placeholder-gray-400
-        text-gray-600
-        relative
-        bg-white
-        rounded
-        text-sm
-        border
-        border-gray-400
-        outline-none
-        focus:outline-none
-        focus:ring
-        w-full
-      "
+      className={cn(
+        'px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white text-sm outline-none focus:outline-none focus:ring w-full',
+        inputClassName,
+      )}
       onChange={onChange}
       required={required}
       placeholder={placeholder}
