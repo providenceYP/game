@@ -53,6 +53,7 @@ export const Navbar: React.FC = (): JSX.Element => {
             <div className="flex flex-col md:flex-row order-last md:order-none">
               {links.map(({ url, title, exact }) => (
                 <NavLink
+                  key={url}
                   to={url}
                   exact={exact ?? false}
                   className="uppercase text-xs font-medium py-2 px-4 bg-white rounded my-1 md:mr-5 md:my-0 hover:bg-blue-700 hover:text-white"
