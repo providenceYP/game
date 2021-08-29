@@ -1,5 +1,5 @@
 export type Props = {
-  image?: string;
+  imageSrc?: string;
   className?: string;
   placeholderClassName?: string;
 };

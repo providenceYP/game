@@ -14,7 +14,7 @@ const Leaderboard = (): JSX.Element => {
   const headers = ['№', 'Аватар', 'Имя', 'Здоровье'];
   const rows = users.map(({ avatar, name, health }, index) => [
     index + 1,
-    <Avatar image={avatar} />,
+    <Avatar imageSrc={avatar} />,
     name,
     health,
   ]);

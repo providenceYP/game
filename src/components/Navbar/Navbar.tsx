@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Button from 'components/Button';
 import Logo from 'components/Logo';
@@ -53,6 +53,7 @@ export const Navbar: React.FC = (): JSX.Element => {
             <div className="flex flex-col md:flex-row order-last md:order-none">
               {links.map(({ url, title, exact }) => (
                 <NavLink
+                  key={url}
                   to={url}
                   exact={exact ?? false}
                   className="uppercase text-xs font-medium py-2 px-4 bg-white rounded my-1 md:mr-5 md:my-0 hover:bg-blue-700 hover:text-white"
@@ -64,18 +65,20 @@ export const Navbar: React.FC = (): JSX.Element => {
             </div>
             <div className="items-center md:flex">
               <div className="flex flex-col md:flex-row md:mx-6">
-                <Link
+                <NavLink
                   to="/login"
                   className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                  activeClassName="text-blue-700"
                 >
                   Вход
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/signup"
-                  className="text-blue-700 bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                  className="bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                  activeClassName="text-blue-700"
                 >
                   Регистрация
-                </Link>
+                </NavLink>
               </div>
             </div>
           </>
