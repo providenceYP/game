@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Props } from './types';
 
-const Image = ({ src, className }: Props): JSX.Element =>
+const Image = ({ src, className, alt = '' }: Props): JSX.Element =>
   src ? (
-    <img className={className} src={src} alt="" />
+    <img className={className} src={src} alt={alt} />
   ) : (
     <div
       className={`bg-gray-200 flex justify-center items-center relative h-0  ${className}`}

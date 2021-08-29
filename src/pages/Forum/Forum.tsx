@@ -20,7 +20,7 @@ const messages = new Array(10).fill({
 
 const Forum = ({ match }: ForumProps): JSX.Element => (
   <Layout className="bg-gray-50">
-    <div className="container m-auto max-w-6xl p-8 font-mono">
+    <div className="container m-auto max-w-6xl p-8">
       <h1 className="text-gray-800 text-3xl px-16 mb-4">{match.params.name}</h1>
       <div className="bg-white rounded-2xl px-16 py-5 min-w-full">
         <div className="w-5/12 p-4 shadow-xl">

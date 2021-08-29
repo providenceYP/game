@@ -11,7 +11,7 @@ const topics = new Array(10).fill({
 
 const ForumList = (): JSX.Element => (
   <Layout>
-    <div className="container m-auto max-w-5xl p-8 font-mono flex">
+    <div className="container m-auto max-w-5xl p-8 flex">
       <div className="flex-initial w-5/12 h-full mr-16">
         <Image className="w-full" src="" />
       </div>
