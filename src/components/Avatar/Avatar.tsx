@@ -5,11 +5,7 @@ import UserIcon from 'components/icons/UserIcon';
 
 import { Props } from './types';
 
-const Avatar = ({
-  imageSrc,
-  className,
-  placeholderClassName,
-}: Props): JSX.Element => (
+const Avatar = ({ imageSrc, className, placeholderClassName }: Props) => (
   <div
     className={`bg-gray-100 h-9 w-9 rounded-full flex justify-center items-center overflow-hidden ${className}`}
   >

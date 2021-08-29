@@ -19,7 +19,11 @@ const ForumList = (): JSX.Element => (
         <h1 className="text-gray-600 text-3xl mb-14">Тематики</h1>
         <div className="grid grid-cols-2">
           {topics.map(({ title, name }) => (
-            <Link to={`/forum/${name}`} className="mb-6 hover:text-blue-700">
+            <Link
+              key={name}
+              to={`/forum/${name}`}
+              className="mb-6 hover:text-blue-700"
+            >
               {title}
             </Link>
           ))}
