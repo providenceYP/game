@@ -25,6 +25,11 @@ export class Tile extends Entity {
     this.ctx.fillStyle = this.colorBorder;
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.ctx.fillStyle = this.colorInside;
-    this.ctx.fillRect(this.xInside, this.yInside, this.widthInside, this.heightInside);
+    this.ctx.fillRect(
+      this.xInside,
+      this.yInside,
+      this.widthInside,
+      this.heightInside,
+    );
   }
 }
