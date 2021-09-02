@@ -1,5 +1,6 @@
 import { Props } from '../Entity/types';
 import { Tile } from '../Tile/Tile';
+import { PlayerObject } from '../PlayerObject/PlayerObject';
 
 export default class Game {
   protected ctx: CanvasRenderingContext2D;
@@ -20,6 +21,12 @@ export default class Game {
 
   public verticalTilesQuantity = 12;
 
+  public centerX = this.width / 2;
+
+  public centerY = this.height / 2;
+
+  public radius = this.squareSize - 10;
+
   protected entities: Props[] = [];
 
   constructor(protected canvas: HTMLCanvasElement) {
@@ -30,26 +37,11 @@ export default class Game {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.ctx.fillStyle = 'grey';
-    this.ctx.fillRect(this.startX, this.startY, 1044, 778);
+    this.ctx.fillRect(this.startX, this.startY, this.width, this.height);
     this.initEntities();
   }
 
   initEntities(): void {
-    this.addEntity(
-      new Tile(
-        this.ctx,
-        this.squareSize,
-        this.squareSize,
-        this.startX,
-        this.startY,
-        '#000000',
-        '#ffffff',
-        this.squareInnerSize,
-        this.squareInnerSize,
-        this.startX + 1,
-        this.startY + 1,
-      ),
-    );
     for (let i = 0; i <= this.horizontalTilesQuantity; i += 1) {
       this.addEntity(
         new Tile(
@@ -113,10 +105,32 @@ export default class Game {
           this.startY + 1 + this.squareSize * i,
         ),
       );
+
+      this.addEntity(
+        new PlayerObject(
+          this.ctx,
+          50, // x
+          this.height - this.squareSize - 32 - this.squareSize, // y
+          (this.squareSize - 20) / 2, // radius
+          '#def9ed', // color
+          'one', // playerType
+        ),
+      );
+
+      this.addEntity(
+        new PlayerObject(
+          this.ctx,
+          50 + 256 + this.squareSize, // x
+          this.height - this.squareSize + 32, // y
+          (this.squareSize - 20) / 2, // radius
+          '#fee8e8', // color
+          'two', // playerType
+        ),
+      );
     }
   }
 
-  addEntity(entity: Props) {
+  addEntity(entity: any) {
     this.entities.push(entity);
     entity.init();
   }
