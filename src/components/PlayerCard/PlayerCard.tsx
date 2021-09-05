@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
+
 import Avatar from 'components/Avatar';
+
 import { Props } from './types';
 
 export default function PlayerCard(props: Props) {
@@ -11,19 +14,23 @@ export default function PlayerCard(props: Props) {
     }
   }, [props.playerType]);
 
+  const className = cn(
+    'relative w-48 h-28 p-4 rounded-2xl bg-opacity-25',
+    props.color,
+    props.className,
+  );
+
   return !readyStatus ? (
     <button
       type="button"
-      className={`relative w-48 h-28 mt-10 ml-10 p-4 rounded-2xl bg-opacity-25 ${props.color} cursor-pointer`}
+      className={cn(className, 'cursor-pointer')}
       onClick={() => setReadyStatus(true)}
       onKeyDown={() => setReadyStatus(true)}
     >
       <p className="font-bold">Click to start</p>
     </button>
   ) : (
-    <div
-      className={`relative w-48 h-28 mt-10 ml-10 p-4 rounded-2xl bg-opacity-25 ${props.color}`}
-    >
+    <div className={className}>
       <div className="flex items-center">
         <Avatar />
         <div className="flex flex-col ml-3">

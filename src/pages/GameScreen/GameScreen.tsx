@@ -9,13 +9,14 @@ import { PlayerType } from './types';
 
 export default function GameScreen() {
   return (
-    <Layout>
-      <div className="self-start">
+    <Layout className="p-10">
+      <div className="self-start mr-10">
         <PlayerCard
           color={PlayerType.green}
           name="Jason"
           playerType={PlayerType.player}
           playerHealth={100}
+          className="mb-10"
         />
         <PlayerCard
           color={PlayerType.red}
@@ -24,7 +25,9 @@ export default function GameScreen() {
           playerHealth={100}
         />
       </div>
-      <GameComponent />
+      <div className="self-start">
+        <GameComponent />
+      </div>
     </Layout>
   );
 }
