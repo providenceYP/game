@@ -1,21 +1,39 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
+import { loginUser } from 'store/slices/users';
+import { State } from 'store/types';
 import { LoginFormType } from './types';
 
 const Login: React.FC = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const loading = useSelector<State>((state) => state.users.loading);
+
   const [fields, setFields] = useState<LoginFormType>({
     login: '',
     password: '',
   });
 
-  const onSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-  }, []);
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+
+      if (!(fields.login && fields.password)) {
+        return;
+      }
+
+      dispatch(loginUser(fields));
+      history.push('/');
+    },
+    [fields],
+  );
 
   const resetForm = useCallback(() => {
     const formFields = Object.keys(fields);
@@ -39,6 +57,7 @@ const Login: React.FC = (): JSX.Element => {
 
   return (
     <Layout>
+      {loading && <span>spinner</span>}
       <Form
         title="Вход"
         onSubmit={onSubmit}

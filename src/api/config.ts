@@ -1,1 +1,1 @@
-export const baseURL = 'https://conduit.productionready.io/api';
+export const baseURL = 'https://ya-praktikum.tech/api/v2/';

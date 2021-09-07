@@ -1,14 +1,22 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
-import { SignupFormType } from './types';
+import { registerUser } from 'store/slices/users';
+import { State } from 'store/types';
+import { RegisterFormType } from './types';
 
-const Signup: React.FC = (): JSX.Element => {
-  const [fields, setFields] = useState<SignupFormType>({
+const Register: React.FC = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const loading = useSelector<State>((state) => state.users.loading);
+
+  const [fields, setFields] = useState<RegisterFormType>({
     firstName: '',
     secondName: '',
     login: '',
@@ -17,9 +25,19 @@ const Signup: React.FC = (): JSX.Element => {
     phone: '',
   });
 
-  const onSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-  }, []);
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+
+      if (!(fields.login && fields.password)) {
+        return;
+      }
+
+      dispatch(registerUser(fields));
+      history.push('/');
+    },
+    [fields],
+  );
 
   const resetForm = useCallback(() => {
     const formFields = Object.keys(fields);
@@ -28,7 +46,7 @@ const Signup: React.FC = (): JSX.Element => {
       {},
     );
 
-    setFields(newState as SignupFormType);
+    setFields(newState as RegisterFormType);
   }, [fields]);
 
   const handleChange = useCallback(
@@ -43,6 +61,7 @@ const Signup: React.FC = (): JSX.Element => {
 
   return (
     <Layout>
+      {loading && <span>spinner</span>}
       <Form
         title="Регистрация"
         onSubmit={onSubmit}
@@ -114,4 +133,4 @@ const Signup: React.FC = (): JSX.Element => {
   );
 };
 
-export default Signup;
+export default Register;

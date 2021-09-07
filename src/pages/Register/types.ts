@@ -1,4 +1,4 @@
-export type SignupFormType = {
+export type RegisterFormType = {
   firstName: string;
   secondName: string;
   login: string;

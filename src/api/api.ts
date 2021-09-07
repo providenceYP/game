@@ -19,7 +19,7 @@ export default class API {
   ): Promise<AxiosResponse | void> {
     const request = this.requests[requestName];
 
-    if (request) {
+    if (!request) {
       throw new Error(REQUEST_NOT_FOUND);
     }
 
