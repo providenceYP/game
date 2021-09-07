@@ -1,4 +1,10 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -7,14 +13,15 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
-import { loginUser } from 'store/slices/users';
-import { State } from 'store/types';
+import { loginUser, Statuses } from 'store/slices/auth';
+import { State } from 'store';
 import { LoginFormType } from './types';
 
 const Login: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const loading = useSelector<State>((state) => state.users.loading);
+  const loading = useSelector<State>((state) => state.auth.loading);
+  const status = useSelector<State>((state) => state.auth.status);
 
   const [fields, setFields] = useState<LoginFormType>({
     login: '',
@@ -30,9 +37,8 @@ const Login: React.FC = (): JSX.Element => {
       }
 
       dispatch(loginUser(fields));
-      history.push('/');
     },
-    [fields],
+    [dispatch, fields],
   );
 
   const resetForm = useCallback(() => {
@@ -55,46 +61,55 @@ const Login: React.FC = (): JSX.Element => {
     [],
   );
 
+  useEffect(() => {
+    if (status === Statuses.OK) {
+      history.push('/');
+    }
+  }, [status, history]);
+
   return (
     <Layout>
-      {loading && <span>spinner</span>}
-      <Form
-        title="Вход"
-        onSubmit={onSubmit}
-        onReset={resetForm}
-        actions={[
-          <Button
-            key="button-submit"
-            className="text-base font-medium rounded-lg p-2 bg-blue-600 text-white"
-            type="submit"
-          >
-            Войти
-          </Button>,
-          <Button
-            key="button-clear"
-            className="text-base font-medium p-2 text-gray-600"
-            type="reset"
-          >
-            Очистить
-          </Button>,
-        ]}
-      >
-        <BaseInput
-          className="mb-2"
-          value={fields.login}
-          onChange={handleChange('login')}
-          placeholder="Логин"
-          required
-        />
-        <BaseInput
-          className="mb-2"
-          value={fields.password}
-          onChange={handleChange('password')}
-          placeholder="Пароль"
-          type="password"
-          required
-        />
-      </Form>
+      {loading ? (
+        <span>Loading...</span>
+      ) : (
+        <Form
+          title="Вход"
+          onSubmit={onSubmit}
+          onReset={resetForm}
+          actions={[
+            <Button
+              key="button-submit"
+              className="text-base font-medium rounded-lg p-2 bg-blue-600 text-white"
+              type="submit"
+            >
+              Войти
+            </Button>,
+            <Button
+              key="button-clear"
+              className="text-base font-medium p-2 text-gray-600"
+              type="reset"
+            >
+              Очистить
+            </Button>,
+          ]}
+        >
+          <BaseInput
+            className="mb-2"
+            value={fields.login}
+            onChange={handleChange('login')}
+            placeholder="Логин"
+            required
+          />
+          <BaseInput
+            className="mb-2"
+            value={fields.password}
+            onChange={handleChange('password')}
+            placeholder="Пароль"
+            type="password"
+            required
+          />
+        </Form>
+      )}
     </Layout>
   );
 };
