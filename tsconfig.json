@@ -24,7 +24,7 @@
     "declaration": false,
     "baseUrl": ".",
     "paths": {
-      "*": ["*", "src/*"]
+      "*": ["*", "src/*", "www/*"]
     }
   },
   "include": [
