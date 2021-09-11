@@ -8,13 +8,13 @@ import { Tile } from '../Tile/Tile';
 export default class Game {
   protected ctx: CanvasRenderingContext2D;
 
-  public width = 1044;
+  public width = 1024;
 
-  public height = 778;
+  public height = 768;
 
-  public startX = 20;
+  public startX = 0;
 
-  public startY = 10;
+  public startY = 0;
 
   public squareSize = 64;
 

@@ -6,7 +6,10 @@ import Avatar from 'components/Avatar';
 import { Props } from './types';
 
 export default function PlayerCard(props: Props) {
-  const className = 'relative w-48 h-28 p-4 rounded-2xl bg-opacity-25';
+  const className = cn(
+    'relative w-48 h-28 p-4 rounded-2xl bg-opacity-25',
+    props.className,
+  );
 
   return !props.isReady ? (
     <button

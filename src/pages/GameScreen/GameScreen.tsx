@@ -25,7 +25,7 @@ export default function GameScreen() {
 
   return (
     <Layout className="p-10">
-      <div className="self-start mr-10">
+      <div className="self-start mr-12">
         {players.map(({ color, name, type, health, isReady }, index) => (
           <PlayerCard
             key={name}
@@ -35,10 +35,13 @@ export default function GameScreen() {
             playerHealth={health}
             isReady={isReady}
             changeStatus={makeHandleChangeStatus(index)}
+            className={index === players.length - 1 ? '' : 'mb-10'}
           />
         ))}
       </div>
-      <GameComponent players={players} />
+      <div className="self-start">
+        <GameComponent players={players} />
+      </div>
     </Layout>
   );
 }
