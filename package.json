@@ -6,7 +6,7 @@
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve",
-    "build": "rm -r ./dist && webpack --mode=production",
+    "build": "rm -r ./dist || true && webpack --mode=production",
     "start": "http-server dist",
     "sync": "npm prune && npm install",
     "lint": "lint-staged",
