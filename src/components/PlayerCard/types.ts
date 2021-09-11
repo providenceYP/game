@@ -5,4 +5,5 @@ export type Props = {
   playerHealth?: number;
   isReady?: boolean;
   changeStatus?: () => void;
+  className?: string;
 };

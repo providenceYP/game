@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Layout from 'components/Layout';
-import PlayerCard from 'components/PlayerCard/PlayerCard';
+import PlayerCard from 'components/PlayerCard';
 import GameComponent from 'components/Game';
 
 import { Player } from 'logic/Player/Player';
@@ -24,8 +24,8 @@ export default function GameScreen() {
   };
 
   return (
-    <Layout>
-      <div className="self-start">
+    <Layout className="p-10">
+      <div className="self-start mr-10">
         {players.map(({ color, name, type, health, isReady }, index) => (
           <PlayerCard
             key={name}
