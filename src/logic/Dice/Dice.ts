@@ -112,8 +112,10 @@ export class Dice extends Entity {
     });
 
     this.ctx.save();
+
     this.ctx.fillStyle = 'black';
     this.ctx.fill(edge);
+
     this.ctx.restore();
   }
 
@@ -125,6 +127,7 @@ export class Dice extends Entity {
     radius: number,
   ) {
     const rectangle = new Path2D();
+
     rectangle.moveTo(x, y + radius);
     rectangle.lineTo(x, y + height - radius);
     rectangle.arcTo(x, y + height, x + radius, y + height, radius);

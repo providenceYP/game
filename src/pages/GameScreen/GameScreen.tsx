@@ -14,7 +14,7 @@ export default function GameScreen() {
     new Player('Simon', PlayerType.bot),
   ]);
 
-  const getHandleChangeStatus = (index: number) => () => {
+  const makeHandleChangeStatus = (index: number) => () => {
     setPlayers((state) => {
       const newPlayers = [...state];
       newPlayers[index].isReady = true;
@@ -34,7 +34,7 @@ export default function GameScreen() {
             playerType={type}
             playerHealth={health}
             isReady={isReady}
-            changeStatus={getHandleChangeStatus(index)}
+            changeStatus={makeHandleChangeStatus(index)}
           />
         ))}
       </div>

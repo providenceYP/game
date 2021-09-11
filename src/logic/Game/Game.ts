@@ -1,3 +1,5 @@
+import { randomNumber } from 'utils/random';
+
 import { Dice } from '../Dice/Dice';
 import { Entity } from '../Entity/Entity';
 import { Player } from '../Player/Player';
@@ -154,7 +156,7 @@ export default class Game {
 
   rollDices = async (dices: Dice[]): Promise<number> => {
     const results = await Promise.all(
-      dices.map((dice) => dice.roll(10 + Math.ceil(Math.random() * 6 - 3))),
+      dices.map((dice) => dice.roll(randomNumber(7, 16, true))),
     );
 
     const indexOfMaxResult = results.reduce(
