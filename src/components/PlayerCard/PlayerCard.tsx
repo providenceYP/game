@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
 import Avatar from 'components/Avatar';
@@ -6,31 +6,23 @@ import Avatar from 'components/Avatar';
 import { Props } from './types';
 
 export default function PlayerCard(props: Props) {
-  const [readyStatus, setReadyStatus] = useState(false);
-
-  useEffect(() => {
-    if (props.playerType === 'bot') {
-      setReadyStatus(true);
-    }
-  }, [props.playerType]);
-
   const className = cn(
     'relative w-48 h-28 p-4 rounded-2xl bg-opacity-25',
-    props.color,
     props.className,
   );
 
-  return !readyStatus ? (
+  return !props.isReady ? (
     <button
       type="button"
       className={cn(className, 'cursor-pointer')}
-      onClick={() => setReadyStatus(true)}
-      onKeyDown={() => setReadyStatus(true)}
+      onClick={props.changeStatus}
+      onKeyDown={props.changeStatus}
+      style={{ background: props.color }}
     >
       <p className="font-bold">Click to start</p>
     </button>
   ) : (
-    <div className={className}>
+    <div className={className} style={{ background: props.color }}>
       <div className="flex items-center">
         <Avatar />
         <div className="flex flex-col ml-3">

@@ -3,5 +3,7 @@ export type Props = {
   name?: string;
   playerType?: string;
   playerHealth?: number;
+  isReady?: boolean;
+  changeStatus?: () => void;
   className?: string;
 };

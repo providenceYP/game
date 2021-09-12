@@ -1,32 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Layout from 'components/Layout';
-import PlayerCard from 'components/PlayerCard/PlayerCard';
+import PlayerCard from 'components/PlayerCard';
+import GameComponent from 'components/Game';
 
-import GameComponent from 'logic/Game/index';
-
+import { Player } from 'logic/Player/Player';
 import { PlayerType } from './types';
 
 export default function GameScreen() {
+  // TODO: убрать после добавления redux
+  const [players, setPlayers] = useState([
+    new Player('Jason', PlayerType.player),
+    new Player('Simon', PlayerType.bot),
+  ]);
+
+  const makeHandleChangeStatus = (index: number) => () => {
+    setPlayers((state) => {
+      const newPlayers = [...state];
+      newPlayers[index].isReady = true;
+
+      return newPlayers;
+    });
+  };
+
   return (
     <Layout className="p-10">
-      <div className="self-start mr-10">
-        <PlayerCard
-          color={PlayerType.green}
-          name="Jason"
-          playerType={PlayerType.player}
-          playerHealth={100}
-          className="mb-10"
-        />
-        <PlayerCard
-          color={PlayerType.red}
-          name="Simon"
-          playerType={PlayerType.bot}
-          playerHealth={100}
-        />
+      <div className="self-start mr-12">
+        {players.map(({ color, name, type, health, isReady }, index) => (
+          <PlayerCard
+            key={name}
+            color={color}
+            name={name}
+            playerType={type}
+            playerHealth={health}
+            isReady={isReady}
+            changeStatus={makeHandleChangeStatus(index)}
+            className={index === players.length - 1 ? '' : 'mb-10'}
+          />
+        ))}
       </div>
       <div className="self-start">
-        <GameComponent />
+        <GameComponent players={players} />
       </div>
     </Layout>
   );
