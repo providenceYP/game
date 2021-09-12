@@ -1,5 +1,5 @@
-import { Player } from 'logic/Player/Player';
+import { IPlayer } from 'logic/IPlayer/IPlayer';
 
 export type Props = {
-  players: Player[];
+  players: IPlayer[];
 };

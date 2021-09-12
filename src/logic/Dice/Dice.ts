@@ -1,11 +1,11 @@
 import { Entity } from 'logic/Entity/Entity';
+import { randomNumber } from 'utils/random';
+import { animate } from 'utils/animate';
 
 export class Dice extends Entity {
   private pointRadius = this.width * 0.08;
 
-  private animationHandle: ReturnType<typeof setTimeout>;
-
-  private speed = 120;
+  private speed = 7;
 
   private readonly points = {
     c: [this.x + this.width / 2, this.y + this.height / 2],
@@ -51,44 +51,22 @@ export class Dice extends Entity {
 
   public init() {}
 
-  public async roll(time: number) {
-    return new Promise((resolve) => {
-      if (this.animationHandle) {
-        clearTimeout(this.animationHandle);
-      }
-
-      this.animationHandle = setTimeout(
-        this.update,
-        this.speed,
-        resolve,
-        null,
-        time,
-      );
-    });
+  public async roll(
+    time: number = randomNumber(10, 20, true),
+  ): Promise<number> {
+    return animate<number>(this.update, this.speed * time, null, time);
   }
 
-  private update = (
-    resolve: (value: number) => void,
-    prevNumber: number,
-    time: number,
-    item = 0,
-  ) => {
+  private update = (step: number, prevNumber: number) => {
+    if (step % this.speed) {
+      return prevNumber;
+    }
+
     const number = this.getNextNumber(prevNumber);
 
     this.draw(number);
 
-    if (item < time) {
-      this.animationHandle = setTimeout(
-        this.update,
-        this.speed,
-        resolve,
-        number,
-        time,
-        item + 1,
-      );
-    } else {
-      resolve(number);
-    }
+    return number;
   };
 
   private getNextNumber(prevNumber: number) {
@@ -101,7 +79,7 @@ export class Dice extends Entity {
     return number;
   }
 
-  public draw(num: number) {
+  public draw(num = 1) {
     this.roundedRect(this.x, this.y, this.width, this.width, this.width * 0.2);
 
     const edge = new Path2D();
@@ -146,7 +124,7 @@ export class Dice extends Entity {
 
     this.ctx.save();
     this.ctx.fillStyle = 'black';
-    this.ctx.lineWidth = 2;
+    this.ctx.lineWidth = 3;
     this.ctx.stroke(rectangle);
 
     this.ctx.fillStyle = this.color;

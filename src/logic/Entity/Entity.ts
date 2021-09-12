@@ -2,16 +2,20 @@ import { Position } from 'utils/Position';
 import { Props } from './types';
 
 export abstract class Entity extends Position implements Props {
-  public initialX: number;
+  public readonly initialX: number;
 
-  public initialY: number;
+  public readonly initialY: number;
+
+  public readonly centerX = this.width / 2;
+
+  public readonly centerY = this.height / 2;
 
   constructor(
     public ctx: CanvasRenderingContext2D,
     x: number,
     y: number,
-    width: number,
-    height: number,
+    readonly width: number,
+    readonly height: number,
   ) {
     super(x, y, width, height);
 
@@ -20,4 +24,6 @@ export abstract class Entity extends Position implements Props {
   }
 
   abstract init(): void;
+
+  public abstract draw(): void;
 }

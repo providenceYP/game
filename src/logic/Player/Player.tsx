@@ -1,18 +1,20 @@
 import { PlayerType } from 'pages/GameScreen/types';
+import { IPlayer } from 'logic/IPlayer/IPlayer';
 
-export class Player {
-  public isReady = this.type === PlayerType.bot;
+export class Player extends IPlayer {
+  public isReady = false;
 
-  public health = 100;
+  public type = PlayerType.player;
 
-  constructor(
-    public name: string,
-    public type: PlayerType,
-    public color: string = Player.generateColor(),
-  ) {}
+  run(callback: () => void) {
+    const listener = () => {
+      window.removeEventListener('keydown', listener);
+      window.removeEventListener('touchstart', listener);
 
-  static generateColor() {
-    // eslint-disable-next-line no-bitwise
-    return `#${(((1 << 24) * Math.random()) | 0).toString(16)}`.padEnd(7, 'f');
+      callback();
+    };
+
+    window.addEventListener('keydown', listener);
+    window.addEventListener('touchstart', listener);
   }
 }

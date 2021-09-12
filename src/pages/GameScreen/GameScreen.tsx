@@ -5,13 +5,13 @@ import PlayerCard from 'components/PlayerCard';
 import GameComponent from 'components/Game';
 
 import { Player } from 'logic/Player/Player';
-import { PlayerType } from './types';
+import { PlayerBot } from 'logic/PlayerBot/PlayerBot';
 
 export default function GameScreen() {
   // TODO: убрать после добавления redux
   const [players, setPlayers] = useState([
-    new Player('Jason', PlayerType.player),
-    new Player('Simon', PlayerType.bot),
+    new Player('Jason'),
+    new PlayerBot('Simon'),
   ]);
 
   const makeHandleChangeStatus = (index: number) => () => {
@@ -24,8 +24,8 @@ export default function GameScreen() {
   };
 
   return (
-    <Layout className="p-10">
-      <div className="self-start mr-12">
+    <Layout className="p-10 overflow-x-auto flex-wrap xl:flex-nowrap">
+      <div className="flex flex-row self-start flex-wrap xl:mr-12 xl:flex-col xl:flex-nowrap">
         {players.map(({ color, name, type, health, isReady }, index) => (
           <PlayerCard
             key={name}
@@ -35,11 +35,13 @@ export default function GameScreen() {
             playerHealth={health}
             isReady={isReady}
             changeStatus={makeHandleChangeStatus(index)}
-            className={index === players.length - 1 ? '' : 'mb-10'}
+            className={
+              index === players.length - 1 ? 'mb-10' : 'mr-10 mb-10 xl:mr-0'
+            }
           />
         ))}
       </div>
-      <div className="self-start">
+      <div className="self-start max-w-full xl:max-w-screen-lg">
         <GameComponent players={players} />
       </div>
     </Layout>
