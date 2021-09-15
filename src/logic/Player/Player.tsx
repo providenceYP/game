@@ -1,18 +1,18 @@
+import { generateRGBA } from 'utils/colors';
+
 import { PlayerType } from 'pages/GameScreen/types';
 
-export class Player {
-  public isReady = this.type === PlayerType.bot;
+export abstract class Player {
+  public isReady = false;
+
+  public type: PlayerType;
 
   public health = 100;
 
   constructor(
     public name: string,
-    public type: PlayerType,
-    public color: string = Player.generateColor(),
+    public color: string = generateRGBA(100, 200),
   ) {}
 
-  static generateColor() {
-    // eslint-disable-next-line no-bitwise
-    return `#${(((1 << 24) * Math.random()) | 0).toString(16)}`.padEnd(7, 'f');
-  }
+  abstract run(callback: () => void): void;
 }
