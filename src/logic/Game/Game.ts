@@ -1,7 +1,7 @@
 import GameMap from 'logic/GameMap/GameMap';
-import { Messanger } from 'logic/Messanger/Messanger';
+import { Messenger } from 'logic/Messenger/Messenger';
 import Manager from 'logic/Manager/Manager';
-import { IPlayer } from 'logic/IPlayer/IPlayer';
+import { Player } from 'logic/Player/Player';
 
 export default class Game {
   private ctx: CanvasRenderingContext2D;
@@ -14,7 +14,7 @@ export default class Game {
 
   private map: GameMap;
 
-  private messanger: Messanger;
+  private messenger: Messenger;
 
   private manager: Manager;
 
@@ -24,7 +24,7 @@ export default class Game {
     this.ctx = canvas.getContext('2d');
   }
 
-  init(players: IPlayer[], onEndGame: () => void): void {
+  init(players: Player[], onEndGame: () => void): void {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.onEndGame = onEndGame;
@@ -33,14 +33,14 @@ export default class Game {
 
     this.map.init();
 
-    this.messanger = new Messanger(this.ctx, this.width, this.height);
+    this.messenger = new Messenger(this.ctx, this.width, this.height);
 
     this.manager = new Manager(
       this.ctx,
-      players,
       this.map,
-      this.messanger,
+      this.messenger,
       this.end,
+      players,
     );
 
     this.manager.init();

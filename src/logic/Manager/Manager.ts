@@ -1,10 +1,10 @@
 import GameMap from 'logic/GameMap/GameMap';
-import { Messanger } from 'logic/Messanger/Messanger';
+import { Messenger } from 'logic/Messenger/Messenger';
 import { Dice } from 'logic/Dice/Dice';
 import { PlayerObject } from 'logic/PlayerObject/PlayerObject';
 import { Direction } from 'logic/PlayerObject/types';
 import { Cell } from 'logic/Cell/Cell';
-import { IPlayer } from 'logic/IPlayer/IPlayer';
+import { Player } from 'logic/Player/Player';
 
 export default class Manager {
   private diceSize = 125;
@@ -17,10 +17,10 @@ export default class Manager {
 
   constructor(
     private ctx: CanvasRenderingContext2D,
-    players: IPlayer[],
     private map: GameMap,
-    private messanger: Messanger,
+    private messenger: Messenger,
     private onEndGame: () => void,
+    players: Player[],
   ) {
     this.playerObjects = players.map(
       (player, index) =>
@@ -44,7 +44,7 @@ export default class Manager {
     this.cells[this.cells.length - 1].addPlayer(this.playerObjects[1]);
 
     this.update();
-    this.messanger.show('Waiting all players...');
+    this.messenger.show('Waiting all players...');
   }
 
   async start() {
@@ -52,7 +52,7 @@ export default class Manager {
 
     this.activePlayer = await this.diceFight();
 
-    this.messanger.show(`${this.activePlayer.player.name} goes first.`, () => {
+    this.messenger.show(`${this.activePlayer.player.name} goes first.`, () => {
       this.update();
       this.nextStep();
     });
@@ -129,7 +129,7 @@ export default class Manager {
 
       this.cells[index].removePlayer(this.activePlayer);
       // eslint-disable-next-line no-await-in-loop
-      await this.cells[nextIndex].movePlayer(this.activePlayer, this.update);
+      await this.cells[nextIndex].receivePlayer(this.activePlayer, this.update);
     }
   };
 
@@ -162,7 +162,7 @@ export default class Manager {
   };
 
   fight = () => {
-    this.messanger.show('Fight!', async () => {
+    this.messenger.show('Fight!', async () => {
       this.update();
       const { player } = await this.diceFight();
 
@@ -170,8 +170,8 @@ export default class Manager {
     });
   };
 
-  end = (player: IPlayer) => {
+  end = (player: Player) => {
     this.update();
-    this.messanger.show(`${player.name} won!!!`, this.onEndGame);
+    this.messenger.show(`${player.name} won!!!`, this.onEndGame);
   };
 }

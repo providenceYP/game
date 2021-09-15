@@ -28,7 +28,7 @@ export class Cell {
     return this.players;
   }
 
-  async movePlayer(player: PlayerObject, update: () => void) {
+  async receivePlayer(player: PlayerObject, update: () => void) {
     this.players.push(player);
 
     const endX = this.tile.x + this.tile.centerX;

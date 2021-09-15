@@ -4,7 +4,7 @@ export function animate<T = void>(
   ...args: any[]
 ): Promise<T> {
   let step = 0;
-  let handle: number;
+  let requestID: number;
 
   return new Promise((resolve) => {
     const func = () => {
@@ -13,13 +13,13 @@ export function animate<T = void>(
       step += 1;
 
       if (step > time) {
-        cancelAnimationFrame(handle);
+        cancelAnimationFrame(requestID);
         resolve(res);
       } else {
-        handle = requestAnimationFrame(func);
+        requestID = requestAnimationFrame(func);
       }
     };
 
-    handle = requestAnimationFrame(func);
+    requestID = requestAnimationFrame(func);
   });
 }

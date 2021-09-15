@@ -1,20 +1,18 @@
-import { PlayerType } from 'pages/GameScreen/types';
-import { IPlayer } from 'logic/IPlayer/IPlayer';
+import { generateRGBA } from 'utils/colors';
 
-export class Player extends IPlayer {
+import { PlayerType } from 'pages/GameScreen/types';
+
+export abstract class Player {
   public isReady = false;
 
-  public type = PlayerType.player;
+  public type: PlayerType;
 
-  run(callback: () => void) {
-    const listener = () => {
-      window.removeEventListener('keydown', listener);
-      window.removeEventListener('touchstart', listener);
+  public health = 100;
 
-      callback();
-    };
+  constructor(
+    public name: string,
+    public color: string = generateRGBA(100, 200),
+  ) {}
 
-    window.addEventListener('keydown', listener);
-    window.addEventListener('touchstart', listener);
-  }
+  abstract run(callback: () => void): void;
 }

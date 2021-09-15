@@ -4,14 +4,14 @@ import Layout from 'components/Layout';
 import PlayerCard from 'components/PlayerCard';
 import GameComponent from 'components/Game';
 
-import { Player } from 'logic/Player/Player';
-import { PlayerBot } from 'logic/PlayerBot/PlayerBot';
+import { Person } from 'logic/Person/Person';
+import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
   // TODO: убрать после добавления redux
   const [players, setPlayers] = useState([
-    new Player('Jason'),
-    new PlayerBot('Simon'),
+    new Person('Jason'),
+    new Bot('Simon'),
   ]);
 
   const makeHandleChangeStatus = (index: number) => () => {

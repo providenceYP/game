@@ -1,7 +1,7 @@
 import { changeAlpha } from 'utils/colors';
 
 import { Entity } from 'logic/Entity/Entity';
-import { IPlayer } from 'logic/IPlayer/IPlayer';
+import { Player } from 'logic/Player/Player';
 
 import { Direction } from './types';
 
@@ -14,7 +14,7 @@ export class PlayerObject extends Entity {
     y: number,
     private radius: number,
     public color: string,
-    public player: IPlayer,
+    public player: Player,
     public direction: Direction = Direction.forward,
   ) {
     super(ctx, x, y, 2 * radius, 2 * radius);

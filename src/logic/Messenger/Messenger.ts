@@ -1,6 +1,6 @@
 import { Entity } from 'logic/Entity/Entity';
 
-export class Messanger extends Entity {
+export class Messenger extends Entity {
   constructor(ctx: CanvasRenderingContext2D, width: number, height: number) {
     super(ctx, 0, 0, width, height);
   }

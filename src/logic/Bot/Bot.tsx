@@ -1,9 +1,9 @@
 import { randomNumber } from 'utils/random';
 
-import { IPlayer } from 'logic/IPlayer/IPlayer';
+import { Player } from 'logic/Player/Player';
 import { PlayerType } from 'pages/GameScreen/types';
 
-export class PlayerBot extends IPlayer {
+export class Bot extends Player {
   public isReady = true;
 
   public type = PlayerType.bot;
