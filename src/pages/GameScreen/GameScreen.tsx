@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from 'components/Layout';
 import PlayerCard from 'components/PlayerCard';
@@ -22,6 +22,42 @@ export default function GameScreen() {
       return newPlayers;
     });
   };
+
+  useEffect(() => {
+    const [activatedPlayers, sleepingPlayers] = players.reduce(
+      (memo, { isReady, name }) => {
+        if (isReady) {
+          memo[0].push(name);
+        } else {
+          memo[1].push(name);
+        }
+
+        return memo;
+      },
+      [[], []] as string[][],
+    );
+
+    if (sleepingPlayers.length) {
+      if ('Notification' in window) {
+        const createNotification = () =>
+          new Notification(
+            `${activatedPlayers.join(', ')} ${
+              activatedPlayers.length === 1 ? 'has' : 'have'
+            } already joined the game. Come on with us!`,
+          );
+
+        if (Notification.permission === 'granted') {
+          createNotification();
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission((permission) => {
+            if (permission === 'granted') {
+              createNotification();
+            }
+          });
+        }
+      }
+    }
+  }, [players]);
 
   return (
     <Layout className="p-10 overflow-x-auto flex-wrap xl:flex-nowrap">
