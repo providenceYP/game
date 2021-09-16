@@ -1,11 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  ChangeEvent,
-  FormEvent,
-} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
@@ -15,15 +9,15 @@ import Layout from 'components/Layout';
 
 import { registerUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
-import { RegisterFormType } from './types';
+import { UserRegister } from 'types/user';
 
 const Register: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const store = useStore();
   const loading = useSelector<State>((state) => state.auth.loading);
-  const status = useSelector<State>((state) => state.auth.status);
 
-  const [fields, setFields] = useState<RegisterFormType>({
+  const [fields, setFields] = useState<UserRegister>({
     firstName: '',
     secondName: '',
     login: '',
@@ -41,8 +35,11 @@ const Register: React.FC = (): JSX.Element => {
       }
 
       dispatch(registerUser(fields));
+      if (store.getState().status === Statuses.OK) {
+        history.push('/');
+      }
     },
-    [dispatch, fields],
+    [dispatch, fields, history, store],
   );
 
   const resetForm = useCallback(() => {
@@ -52,24 +49,18 @@ const Register: React.FC = (): JSX.Element => {
       {},
     );
 
-    setFields(newState as RegisterFormType);
+    setFields(newState as UserRegister);
   }, [fields]);
 
   const handleChange = useCallback(
     (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
-      setFields((values) => ({
+      setFields((values: UserRegister) => ({
         ...values,
         [name]: e.target.value,
       }));
     },
     [],
   );
-
-  useEffect(() => {
-    if (status === Statuses.OK) {
-      history.push('/');
-    }
-  }, [status, history]);
 
   return (
     <Layout>

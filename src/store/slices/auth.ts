@@ -1,21 +1,35 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import API from 'api';
-import { LoginFormType } from 'pages/Login/types';
+import { UserLogin, UserLoginBack } from 'types/user';
 import { RegisterFormType } from 'pages/Register/types';
+import {
+  PendingAction,
+  RejectedAction,
+  FulfilledAction,
+  AuthState,
+} from 'store/types';
 
 export enum Statuses {
   OK = 'OK',
   ERROR = 'ERROR',
 }
 
+export enum ActionTypes {
+  PENDING = '/pending',
+  REJECTED = '/rejected',
+  FULFILLED = '/fulfilled',
+}
+
+const initialState: AuthState = { loading: false, status: null };
+
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (user: LoginFormType) => {
+  async (user: UserLogin) => {
     try {
-      await API.createRequest('login', user);
+      await API.createRequest('login', user as UserLoginBack);
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   },
 );
@@ -35,39 +49,37 @@ export const registerUser = createAsyncThunk(
         phone,
       });
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   },
 );
 
 const slice = createSlice({
   name: 'auth',
-  initialState: { loading: false, status: null },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, (state) => ({ ...state, loading: true }))
-      .addCase(loginUser.fulfilled, (state) => ({
-        ...state,
-        loading: false,
-        status: Statuses.OK,
-      }))
-      .addCase(loginUser.rejected, (state) => ({
-        ...state,
-        loading: false,
-        status: Statuses.ERROR,
-      }))
-      .addCase(registerUser.pending, (state) => ({ ...state, loading: true }))
-      .addCase(registerUser.fulfilled, (state) => ({
-        ...state,
-        loading: false,
-        status: Statuses.OK,
-      }))
-      .addCase(registerUser.rejected, (state) => ({
-        ...state,
-        loading: false,
-        status: Statuses.ERROR,
-      }));
+      .addMatcher<PendingAction>(
+        (action) => action.type.endsWith(ActionTypes.PENDING),
+        (state) => ({
+          ...state,
+          loading: false,
+          status: Statuses.OK,
+        }),
+      )
+      .addMatcher<RejectedAction>(
+        (action) => action.type.endsWith(ActionTypes.REJECTED),
+        (state) => ({
+          ...state,
+          loading: false,
+          status: Statuses.ERROR,
+        }),
+      )
+      .addMatcher<FulfilledAction>(
+        (action) => action.type.endsWith(ActionTypes.FULFILLED),
+        (state) => ({ ...state, loading: true }),
+      );
   },
 });
 

@@ -1,11 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  ChangeEvent,
-  FormEvent,
-} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
@@ -15,15 +9,15 @@ import Layout from 'components/Layout';
 
 import { loginUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
-import { LoginFormType } from './types';
+import { UserLogin } from 'types/user';
 
 const Login: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const store = useStore();
   const loading = useSelector<State>((state) => state.auth.loading);
-  const status = useSelector<State>((state) => state.auth.status);
 
-  const [fields, setFields] = useState<LoginFormType>({
+  const [fields, setFields] = useState<UserLogin>({
     login: '',
     password: '',
   });
@@ -37,8 +31,12 @@ const Login: React.FC = (): JSX.Element => {
       }
 
       dispatch(loginUser(fields));
+
+      if (store.getState().status === Statuses.OK) {
+        history.push('/');
+      }
     },
-    [dispatch, fields],
+    [dispatch, fields, history, store],
   );
 
   const resetForm = useCallback(() => {
@@ -48,24 +46,18 @@ const Login: React.FC = (): JSX.Element => {
       {},
     );
 
-    setFields(newState as LoginFormType);
+    setFields(newState as UserLogin);
   }, [fields]);
 
   const handleChange = useCallback(
     (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
-      setFields((values) => ({
+      setFields((values: UserLogin) => ({
         ...values,
         [name]: e.target.value,
       }));
     },
     [],
   );
-
-  useEffect(() => {
-    if (status === Statuses.OK) {
-      history.push('/');
-    }
-  }, [status, history]);
 
   return (
     <Layout>
