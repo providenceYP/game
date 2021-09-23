@@ -4,7 +4,7 @@ type UserLogin = {
   login: string;
   password: string;
 };
-type UserLoginBack = SnakeCasedProperties<UserLogin>;
+type UserLoginDTO = SnakeCasedProperties<UserLogin>;
 type UserRegister = {
   firstName: string;
   secondName: string;
@@ -13,6 +13,6 @@ type UserRegister = {
   password: string;
   phone: string;
 };
-type UserRegisterBack = SnakeCasedProperties<UserRegister>;
+type UserRegisterDTO = SnakeCasedProperties<UserRegister>;
 
-export { UserLogin, UserLoginBack, UserRegister, UserRegisterBack };
+export { UserLogin, UserLoginDTO, UserRegister, UserRegisterDTO };

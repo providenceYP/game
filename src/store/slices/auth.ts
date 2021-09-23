@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import API from 'api';
-import { UserLogin, UserLoginBack } from 'types/user';
-import { RegisterFormType } from 'pages/Register/types';
+import { objectToSomeCase, snakelize } from 'src/utils/cases';
+import {
+  UserLogin,
+  UserLoginDTO,
+  UserRegister,
+  UserRegisterDTO,
+} from 'types/user';
 import {
   PendingAction,
   RejectedAction,
@@ -27,7 +32,7 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (user: UserLogin) => {
     try {
-      await API.createRequest('login', user as UserLoginBack);
+      await API.createRequest('login', user as UserLoginDTO);
     } catch (error) {
       console.log(error);
     }
@@ -36,18 +41,12 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (user: RegisterFormType) => {
-    const { firstName, secondName, login, email, password, phone } = user;
-
+  async (user: UserRegister) => {
     try {
-      await API.createRequest('register', {
-        first_name: firstName,
-        second_name: secondName,
-        login,
-        email,
-        password,
-        phone,
-      });
+      await API.createRequest(
+        'register',
+        objectToSomeCase(user, snakelize) as UserRegisterDTO,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -61,24 +60,26 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher<PendingAction>(
-        (action) => action.type.endsWith(ActionTypes.PENDING),
-        (state) => ({
-          ...state,
-          loading: false,
-          status: Statuses.OK,
-        }),
+        (action: { type: string }) => action.type.endsWith(ActionTypes.PENDING),
+        (state: AuthState) => ({ ...state, loading: true }),
       )
       .addMatcher<RejectedAction>(
-        (action) => action.type.endsWith(ActionTypes.REJECTED),
-        (state) => ({
+        (action: { type: string }) =>
+          action.type.endsWith(ActionTypes.REJECTED),
+        (state: AuthState) => ({
           ...state,
           loading: false,
           status: Statuses.ERROR,
         }),
       )
       .addMatcher<FulfilledAction>(
-        (action) => action.type.endsWith(ActionTypes.FULFILLED),
-        (state) => ({ ...state, loading: true }),
+        (action: { type: string }) =>
+          action.type.endsWith(ActionTypes.FULFILLED),
+        (state: AuthState) => ({
+          ...state,
+          loading: false,
+          status: Statuses.OK,
+        }),
       );
   },
 });

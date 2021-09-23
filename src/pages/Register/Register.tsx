@@ -1,5 +1,11 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
-import { useSelector, useDispatch, useStore } from 'react-redux';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
@@ -14,7 +20,7 @@ import { UserRegister } from 'types/user';
 const Register: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const store = useStore();
+  const status = useSelector<State>((state) => state.auth.status);
   const loading = useSelector<State>((state) => state.auth.loading);
 
   const [fields, setFields] = useState<UserRegister>({
@@ -26,6 +32,12 @@ const Register: React.FC = (): JSX.Element => {
     phone: '',
   });
 
+  useEffect(() => {
+    if (status === Statuses.OK) {
+      history.push('/');
+    }
+  }, [status, history]);
+
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
@@ -35,11 +47,8 @@ const Register: React.FC = (): JSX.Element => {
       }
 
       dispatch(registerUser(fields));
-      if (store.getState().status === Statuses.OK) {
-        history.push('/');
-      }
     },
-    [dispatch, fields, history, store],
+    [dispatch, fields],
   );
 
   const resetForm = useCallback(() => {

@@ -1,5 +1,11 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
-import { useSelector, useDispatch, useStore } from 'react-redux';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import BaseInput from 'components/BaseInput';
@@ -14,13 +20,19 @@ import { UserLogin } from 'types/user';
 const Login: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const store = useStore();
   const loading = useSelector<State>((state) => state.auth.loading);
+  const status = useSelector<State>((state) => state.auth.status);
 
   const [fields, setFields] = useState<UserLogin>({
     login: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (status === Statuses.OK) {
+      history.push('/');
+    }
+  }, [status, history]);
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -31,12 +43,8 @@ const Login: React.FC = (): JSX.Element => {
       }
 
       dispatch(loginUser(fields));
-
-      if (store.getState().status === Statuses.OK) {
-        history.push('/');
-      }
     },
-    [dispatch, fields, history, store],
+    [dispatch, fields],
   );
 
   const resetForm = useCallback(() => {
