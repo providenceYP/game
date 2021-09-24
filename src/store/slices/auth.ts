@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import API from 'api';
-import { objectToSomeCase, snakelize } from 'src/utils/cases';
+import { transformObjectToCase, snakelize } from 'src/utils/cases';
 import {
   UserLogin,
   UserLoginDTO,
@@ -45,7 +45,7 @@ export const registerUser = createAsyncThunk(
     try {
       await API.createRequest(
         'register',
-        objectToSomeCase(user, snakelize) as UserRegisterDTO,
+        transformObjectToCase(user, snakelize) as UserRegisterDTO,
       );
     } catch (error) {
       console.log(error);
@@ -66,8 +66,7 @@ const slice = createSlice({
       .addMatcher<RejectedAction>(
         (action: { type: string }) =>
           action.type.endsWith(ActionTypes.REJECTED),
-        (state: AuthState) => ({
-          ...state,
+        () => ({
           loading: false,
           status: Statuses.ERROR,
         }),
@@ -75,8 +74,7 @@ const slice = createSlice({
       .addMatcher<FulfilledAction>(
         (action: { type: string }) =>
           action.type.endsWith(ActionTypes.FULFILLED),
-        (state: AuthState) => ({
-          ...state,
+        () => ({
           loading: false,
           status: Statuses.OK,
         }),

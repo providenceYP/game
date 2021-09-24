@@ -15,7 +15,7 @@ const camelize = (key: string): string => {
   return newKey.substr(0, 1).toLowerCase() + newKey.substr(1);
 };
 
-const objectToSomeCase = (
+const transformObjectToCase = (
   data: SomeData,
   getNewCase: (key: string) => string,
 ): SomeData =>
@@ -27,4 +27,4 @@ const objectToSomeCase = (
     return acc;
   }, {});
 
-export { snakelize, camelize, objectToSomeCase };
+export { snakelize, camelize, transformObjectToCase };
