@@ -13,19 +13,23 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
-import { loginUser, Statuses } from 'store/slices/auth';
+import { registerUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
-import { UserLogin } from 'types/user';
+import { UserRegister } from 'types/user';
 
-const Login: React.FC = (): JSX.Element => {
+const Register: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const loading = useSelector<State>((state) => state.auth.loading);
   const status = useSelector<State>((state) => state.auth.status);
+  const loading = useSelector<State>((state) => state.auth.loading);
 
-  const [fields, setFields] = useState<UserLogin>({
+  const [fields, setFields] = useState<UserRegister>({
+    firstName: '',
+    secondName: '',
     login: '',
+    email: '',
     password: '',
+    phone: '',
   });
 
   useEffect(() => {
@@ -42,7 +46,7 @@ const Login: React.FC = (): JSX.Element => {
         return;
       }
 
-      dispatch(loginUser(fields));
+      dispatch(registerUser(fields));
     },
     [dispatch, fields],
   );
@@ -54,12 +58,12 @@ const Login: React.FC = (): JSX.Element => {
       {},
     );
 
-    setFields(newState as UserLogin);
+    setFields(newState as UserRegister);
   }, [fields]);
 
   const handleChange = useCallback(
     (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
-      setFields((values: UserLogin) => ({
+      setFields((values: UserRegister) => ({
         ...values,
         [name]: e.target.value,
       }));
@@ -73,7 +77,7 @@ const Login: React.FC = (): JSX.Element => {
         <span>Loading...</span>
       ) : (
         <Form
-          title="Вход"
+          title="Регистрация"
           onSubmit={onSubmit}
           onReset={resetForm}
           actions={[
@@ -82,7 +86,7 @@ const Login: React.FC = (): JSX.Element => {
               className="text-base font-medium rounded-lg p-2 bg-blue-600 text-white"
               type="submit"
             >
-              Войти
+              Зарегистрироваться
             </Button>,
             <Button
               key="button-clear"
@@ -95,9 +99,31 @@ const Login: React.FC = (): JSX.Element => {
         >
           <BaseInput
             className="mb-2"
+            value={fields.firstName}
+            onChange={handleChange('firstName')}
+            placeholder="Имя"
+            required
+          />
+          <BaseInput
+            className="mb-2"
+            value={fields.secondName}
+            onChange={handleChange('secondName')}
+            placeholder="Фамилия"
+            required
+          />
+          <BaseInput
+            className="mb-2"
             value={fields.login}
             onChange={handleChange('login')}
             placeholder="Логин"
+            required
+          />
+          <BaseInput
+            className="mb-2"
+            value={fields.email}
+            onChange={handleChange('email')}
+            placeholder="Почта"
+            type="email"
             required
           />
           <BaseInput
@@ -108,10 +134,18 @@ const Login: React.FC = (): JSX.Element => {
             type="password"
             required
           />
+          <BaseInput
+            className="mb-2"
+            value={fields.phone}
+            onChange={handleChange('phone')}
+            placeholder="Телефон"
+            type="phone"
+            required
+          />
         </Form>
       )}
     </Layout>
   );
 };
 
-export default Login;
+export default Register;

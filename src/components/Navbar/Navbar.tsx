@@ -73,7 +73,7 @@ export const Navbar: React.FC = (): JSX.Element => {
                   Вход
                 </NavLink>
                 <NavLink
-                  to="/signup"
+                  to="/register"
                   className="bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
                   activeClassName="text-blue-700"
                 >
