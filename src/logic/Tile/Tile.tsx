@@ -7,29 +7,26 @@ export class Tile extends Entity {
     height: number,
     x: number,
     y: number,
-    public colorBorder: string,
-    public colorInside: string,
-    public widthInside: number,
-    public heightInside: number,
-    public xInside: number,
-    public yInside: number,
+    public borderColor: string,
+    public insideColor: string,
   ) {
     super(ctx, x, y, width, height);
   }
 
-  init(): void {
-    this.update();
-  }
+  init(): void {}
 
-  update(): void {
-    this.ctx.fillStyle = this.colorBorder;
-    this.ctx.fillRect(this.x, this.y, this.width, this.height);
-    this.ctx.fillStyle = this.colorInside;
-    this.ctx.fillRect(
-      this.xInside,
-      this.yInside,
-      this.widthInside,
-      this.heightInside,
-    );
+  draw(): void {
+    const rect = new Path2D();
+
+    rect.rect(this.x, this.y, this.width, this.height);
+
+    this.ctx.save();
+    this.ctx.fillStyle = this.insideColor;
+    this.ctx.strokeStyle = this.borderColor;
+
+    this.ctx.fill(rect);
+    this.ctx.stroke(rect);
+
+    this.ctx.restore();
   }
 }

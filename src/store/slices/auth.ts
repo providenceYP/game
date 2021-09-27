@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import API from 'api';
-import { transformObjectToCase, snakelize } from 'src/utils/cases';
+import { transformObjectToCase, snakelize } from 'utils/cases';
 import {
   UserLogin,
   UserLoginDTO,

@@ -1,8 +1,10 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 
-const config = {
-  mode: 'development',
+const commonConfig = {
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
@@ -19,7 +21,7 @@ const config = {
         use: 'html-loader',
       },
       {
-        test: /\.svg?$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
       },
       {
@@ -44,8 +46,8 @@ const config = {
   },
   plugins: [new HTMLWebpackPlugin({ template: './www/index.html' })],
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    extensions: ['.ts', '.tsx', '.js']
+    modules: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'www'), 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
   devServer: {
     compress: true,
@@ -56,10 +58,33 @@ const config = {
   },
 };
 
-module.exports = (env, argv) => {
-  if (!argv.mode || argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-  }
+const developmentConfig = {
+  mode: 'development',
+  devtool: 'inline-source-map'
+};
 
-  return config;
+const productionConfig = {
+  mode: 'production',
+  plugins: [new WorkboxPlugin.GenerateSW({
+    clientsClaim: true,
+    skipWaiting: true,
+    maximumFileSizeToCacheInBytes: 40 * 1024 * 1024
+  })],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+  }
+};
+
+module.exports = (env, args) => {
+  switch(args.mode) {
+    case 'production':
+      return merge(commonConfig, productionConfig);
+    default:
+      return merge(commonConfig, developmentConfig);
+  }
 };
