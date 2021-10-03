@@ -108,7 +108,7 @@ const Login: React.FC = (): JSX.Element => {
             </Button>,
             // <a href="https://oauth.yandex.ru/authorize?response_type=code&client_id=c3a050c6aca944c18270f1c3027d0966&redirect_uri=http://localhost:3000/">
             <Button
-              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white ml-20"
+              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white"
               key="redirect"
               onClick={getServiceId}
             >
