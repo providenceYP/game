@@ -67,6 +67,21 @@ const Login: React.FC = (): JSX.Element => {
     [],
   );
 
+  async function getServiceId() {
+    const init = {
+      method: 'GET',
+    };
+    const response = await fetch(
+      'https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=http://localhost:3000/',
+      init,
+    );
+    const mediaType = response.headers.get('content-type');
+    if (mediaType.includes('json')) {
+      const serviceId = await response.json();
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=http://localhost:3000/`;
+    }
+  }
+
   return (
     <Layout>
       {loading ? (
@@ -90,6 +105,14 @@ const Login: React.FC = (): JSX.Element => {
               type="reset"
             >
               Очистить
+            </Button>,
+            // <a href="https://oauth.yandex.ru/authorize?response_type=code&client_id=c3a050c6aca944c18270f1c3027d0966&redirect_uri=http://localhost:3000/">
+            <Button
+              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white ml-20"
+              key="redirect"
+              onClick={getServiceId}
+            >
+              OAuth Yandex
             </Button>,
           ]}
         >
