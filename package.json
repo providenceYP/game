@@ -12,6 +12,7 @@
     "lint": "lint-staged",
     "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"
   },
+  "proxy": "http://localhost:3000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/providenceYP/game.git"
