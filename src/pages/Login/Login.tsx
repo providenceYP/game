@@ -72,7 +72,7 @@ const Login: React.FC = (): JSX.Element => {
       method: 'GET',
     };
     const response = await fetch(
-      'https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=http://localhost:3000/',
+      'https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=http://localhost:3000',
       init,
     );
     const mediaType = response.headers.get('content-type');
