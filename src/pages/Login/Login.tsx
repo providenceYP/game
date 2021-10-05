@@ -78,7 +78,7 @@ const Login: React.FC = (): JSX.Element => {
     const mediaType = response.headers.get('content-type');
     if (mediaType.includes('json')) {
       const serviceId = await response.json();
-      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=http://localhost:3000/`;
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=http://localhost:3000`;
     }
   }
 
