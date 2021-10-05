@@ -9,14 +9,10 @@ async function getTokenInfo() {
     code: queryCode,
     redirect_uri: 'http://localhost:3000',
   });
-  const init = {
-    method: 'POST',
-    headers,
-    body,
-  };
+
   const response = await fetch(
     'https://ya-praktikum.tech/api/v2/oauth/yandex',
-    init,
+    { method: 'POST', headers, body, credentials: 'include' },
   );
   const mediaType = response.headers.get('content-type');
   if (mediaType.includes('json')) {
