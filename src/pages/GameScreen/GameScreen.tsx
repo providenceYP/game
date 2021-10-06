@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from 'components/Layout';
 import PlayerCard from 'components/PlayerCard';
 import GameComponent from 'components/Game';
 
-import { Person } from 'logic/Person/Person';
+// import { Person } from 'logic/Person/Person';
 import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
   // TODO: убрать после добавления redux
-  const [players, setPlayers] = useState([
-    new Person('Jason'),
-    new Bot('Simon'),
-  ]);
+  const [players, setPlayers] = useState([]);
+
+  const handleChangeHealth = () => {
+    setPlayers((state) => [...state]);
+  };
+
+  useEffect(() => {
+    setPlayers([
+      new Bot('Jason', handleChangeHealth),
+      new Bot('Simon', handleChangeHealth),
+    ]);
+  }, []);
 
   const makeHandleChangeStatus = (index: number) => () => {
     setPlayers((state) => {
@@ -41,9 +49,14 @@ export default function GameScreen() {
           />
         ))}
       </div>
-      <div className="self-start max-w-full xl:max-w-screen-lg">
-        <GameComponent players={players} />
-      </div>
+      {!!players.length && (
+        <div className="self-start max-w-full xl:max-w-screen-lg">
+          <GameComponent
+            players={players}
+            onChangeHealth={handleChangeHealth}
+          />
+        </div>
+      )}
     </Layout>
   );
 }

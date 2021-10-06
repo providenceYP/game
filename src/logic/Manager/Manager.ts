@@ -5,15 +5,28 @@ import { PlayerObject } from 'logic/PlayerObject/PlayerObject';
 import { Direction } from 'logic/PlayerObject/types';
 import { Cell } from 'logic/Cell/Cell';
 import { Player } from 'logic/Player/Player';
+import { Monster } from 'logic/Monster/Monster';
+
+import { monsterCollection, MonsterData } from 'utils/monsters';
+import { randomChoice } from 'utils/random';
+import { animate } from 'utils/animate';
 
 export default class Manager {
   private diceSize = 125;
+
+  private cardSize = 300;
+
+  private monstersCountFactor = 0.4;
+
+  private monstersCount: number;
 
   private activePlayer: PlayerObject;
 
   private cells: Cell[];
 
   private playerObjects: PlayerObject[];
+
+  private shownMonsters = [] as Monster[];
 
   constructor(
     private ctx: CanvasRenderingContext2D,
@@ -43,8 +56,27 @@ export default class Manager {
     this.cells[1].addPlayer(this.playerObjects[0]);
     this.cells[this.cells.length - 1].addPlayer(this.playerObjects[1]);
 
+    this.monstersCount = Math.ceil(
+      this.cells.length * this.monstersCountFactor,
+    );
+
+    this.initMonsters();
+
     this.update();
     this.messenger.show('Waiting all players...');
+  }
+
+  initMonsters() {
+    for (let i = 0; i < this.monstersCount; i += 1) {
+      const cell = randomChoice<Cell>(
+        this.cells,
+        ({ barriers }, index) =>
+          !barriers.length && index > 1 && index < this.cells.length - 1,
+      );
+      const monster = randomChoice<MonsterData>(monsterCollection);
+
+      cell.addBarrier(new Monster(this.ctx, monster));
+    }
   }
 
   async start() {
@@ -79,6 +111,10 @@ export default class Manager {
     this.cells.forEach((cell) => {
       cell.draw();
     });
+
+    this.shownMonsters.forEach((monster) => {
+      monster.draw();
+    });
   };
 
   nextStep = () => {
@@ -86,6 +122,51 @@ export default class Manager {
   };
 
   step = async () => {
+    const moveSteps = await this.rollDice(this.activePlayer);
+
+    setTimeout(async () => {
+      await this.movePlayerObject(moveSteps);
+
+      const cellIndex = this.getCellIndexByPlayer(this.activePlayer);
+      const sign = this.activePlayer.direction === Direction.forward ? 1 : -1;
+      const nextIndex = (cellIndex + sign) % this.cells.length;
+
+      const barrier = this.cells[cellIndex].barriers.find(
+        ({ health }) => health > 0,
+      );
+
+      if (barrier) {
+        const times = 50;
+
+        await animate((step) => {
+          const cardSize = (this.cardSize * step) / times;
+          const tileX = this.cells[cellIndex].tile.centerX;
+          const tileY = this.cells[cellIndex].tile.centerY;
+          const dx = (Math.abs(this.map.centerX - tileX) * step) / times;
+          const dy = (Math.abs(this.map.centerY - tileY) * step) / times;
+
+          this.cells[cellIndex].barriers[0].init(
+            tileX - cardSize / 2 + (this.map.centerX > tileX ? dx : -dx),
+            tileY - cardSize / 2 + (this.map.centerY > tileY ? dy : -dy),
+            cardSize,
+          );
+
+          this.update();
+          barrier.draw();
+        }, times);
+
+        this.activePlayer.player.run(() => this.fightWithMonster(barrier));
+      } else if (this.cells[nextIndex].players.length) {
+        this.fight();
+      } else {
+        this.changeActivePlayer();
+
+        this.activePlayer.player.run(this.step);
+      }
+    }, 2000);
+  };
+
+  rollDice(player: PlayerObject) {
     const dice = new Dice(
       this.ctx,
       ((this.map.centerX * Math.random()) % this.map.centerX) +
@@ -93,27 +174,38 @@ export default class Manager {
       ((this.map.centerY * Math.random()) % this.map.centerY) +
         this.map.centerY / 2,
       this.diceSize,
-      this.activePlayer.color,
+      player.color,
     );
 
-    const moveSteps = await dice.roll();
+    return dice.roll();
+  }
+
+  async fightWithMonster(monster: Monster) {
+    const attack = await this.rollDice(this.activePlayer);
 
     setTimeout(async () => {
-      await this.movePlayerObject(moveSteps);
+      await monster.subtractHealth(attack);
 
-      this.changeActivePlayer();
+      if (monster.health) {
+        this.shownMonsters = this.shownMonsters
+          .filter((barrier) => monster !== barrier)
+          .concat(monster);
 
-      const cellIndex = this.getCellIndexByPlayer(this.activePlayer);
-      const sign = this.activePlayer.direction === Direction.forward ? 1 : -1;
-      const nextIndex = (cellIndex + sign) % this.cells.length;
+        this.activePlayer.player.subtractHealth(monster.attack);
 
-      if (this.cells[nextIndex].players.length) {
-        this.fight();
+        this.activePlayer.player.run(() => this.fightWithMonster(monster));
       } else {
+        this.shownMonsters = this.shownMonsters.filter(
+          (barrier) => barrier !== monster,
+        );
+
+        this.changeActivePlayer();
         this.activePlayer.player.run(this.step);
       }
+
+      this.update();
     }, 2000);
-  };
+  }
 
   movePlayerObject = async (steps: number) => {
     const cellIndex = this.getCellIndexByPlayer(this.activePlayer);
