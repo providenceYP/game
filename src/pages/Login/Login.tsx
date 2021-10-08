@@ -17,6 +17,8 @@ import { loginUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
 import { UserLogin } from 'types/user';
 
+import getServiceId from 'utils/getServiceId';
+
 const Login: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -90,6 +92,13 @@ const Login: React.FC = (): JSX.Element => {
               type="reset"
             >
               Очистить
+            </Button>,
+            <Button
+              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white"
+              key="redirect"
+              onClick={getServiceId}
+            >
+              OAuth Yandex
             </Button>,
           ]}
         >
