@@ -7,3 +7,17 @@ export const randomNumber = (
 
   return isInteger ? Math.ceil(num) : num;
 };
+
+export function randomChoice<T>(
+  arr: T[],
+  check?: (element: T, index: number) => boolean,
+): T {
+  const index = Math.floor(arr.length * Math.random());
+  const element = arr[index];
+
+  if (check?.(element, index) ?? true) {
+    return element;
+  }
+
+  return randomChoice(arr, check);
+}
