@@ -15,7 +15,7 @@ export function randomChoice<T>(
   const index = Math.floor(arr.length * Math.random());
   const element = arr[index];
 
-  if (check?.(element, index) ?? true) {
+  if (!check || check(element, index)) {
     return element;
   }
 

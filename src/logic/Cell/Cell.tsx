@@ -52,10 +52,12 @@ export class Cell {
 
   removePlayer(removingPlayer: PlayerObject): PlayerObject[] {
     const players = this.players.filter((player) => player !== removingPlayer);
+
     if (players.length !== this.players.length) {
       this.passed = true;
       this.players = players;
     }
+
     return this.players;
   }
 
@@ -73,7 +75,7 @@ export class Cell {
     const barriers = this.barriers.filter(({ health }) => health > 0);
 
     if (barriers.length && !this.passed) {
-      this.tile.lineWidth = 2;
+      this.tile.lineWidth = this.tileLineWidth * 2;
       this.tile.borderColor = '#F07F6C';
 
       this.barriers.forEach((barrier) => {

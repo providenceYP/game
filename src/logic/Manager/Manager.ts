@@ -18,6 +18,8 @@ export default class Manager {
 
   private monstersCountFactor = 0.4;
 
+  private actionTimeout = 2000;
+
   private monstersCount: number;
 
   private activePlayer: PlayerObject;
@@ -67,12 +69,11 @@ export default class Manager {
   }
 
   initMonsters() {
+    const checkCellForMonster = ({ barriers }: Cell, index: number) =>
+      !barriers.length && index > 1 && index < this.cells.length - 1;
+
     for (let i = 0; i < this.monstersCount; i += 1) {
-      const cell = randomChoice<Cell>(
-        this.cells,
-        ({ barriers }, index) =>
-          !barriers.length && index > 1 && index < this.cells.length - 1,
-      );
+      const cell = randomChoice<Cell>(this.cells, checkCellForMonster);
       const monster = randomChoice<MonsterData>(monsterCollection);
 
       cell.addBarrier(new Monster(this.ctx, monster));
@@ -163,7 +164,7 @@ export default class Manager {
 
         this.activePlayer.player.run(this.step);
       }
-    }, 2000);
+    }, this.actionTimeout);
   };
 
   rollDice(player: PlayerObject) {
@@ -204,7 +205,7 @@ export default class Manager {
       }
 
       this.update();
-    }, 2000);
+    }, this.actionTimeout);
   }
 
   movePlayerObject = async (steps: number) => {
