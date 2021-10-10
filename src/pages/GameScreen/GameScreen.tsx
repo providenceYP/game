@@ -39,12 +39,13 @@ export default function GameScreen() {
 
     if (sleepingPlayers.length) {
       if ('Notification' in window) {
-        const createNotification = () =>
-          new Notification(
-            `${activatedPlayers.join(', ')} ${
-              activatedPlayers.length === 1 ? 'has' : 'have'
-            } already joined the game. Come on with us!`,
-          );
+        const createNotification = () => {
+          const playerNames = activatedPlayers.join(', ');
+          const verb = activatedPlayers.length === 1 ? 'has' : 'have';
+          const text = `${playerNames} ${verb} already joined the game. Come on with us!`;
+
+          return new Notification(text);
+        };
 
         if (Notification.permission === 'granted') {
           createNotification();
