@@ -26,8 +26,11 @@ const Forum: React.FC = () => {
 
   return (
     <Layout className="bg-gray-50">
-      <AddTodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleComplete={toggleComplete} />
+      <div className="">
+
+        <TodoList todos={todos} toggleComplete={toggleComplete} />
+        <AddTodoForm addTodo={addTodo} />
+      </div>
     </Layout>
   );
 };

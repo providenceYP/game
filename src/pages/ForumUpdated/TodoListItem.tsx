@@ -1,27 +1,26 @@
 /* eslint-disable */
 import React from 'react';
-import { Todo, ToggleComplete } from './types';
+import { Todo } from './types';
 import './TodoListItem.css';
 
 interface TodoListItemProps {
   todo: Todo;
-  toggleComplete: ToggleComplete;
+  // toggleComplete: ToggleComplete;
 }
 
 export const TodoListItem: React.FC<TodoListItemProps> = ({
   todo,
-  toggleComplete,
+  // toggleComplete,
 }) => {
   return (
-    <li>
-      <label className={todo.complete ? 'complete' : undefined}>
-        <input
-          type="checkbox"
-          onChange={() => toggleComplete(todo)}
-          checked={todo.complete}
-        />
-        {todo.text}
-      </label>
+    <li className="border-2 border-gray-500 p-6 m-2 rounded-md">
+      <div className="flex justify-between">
+        <div>{todo.text}</div>
+        <div className="text-sm">
+          username <br />
+          date
+        </div>
+      </div>
     </li>
   );
 };

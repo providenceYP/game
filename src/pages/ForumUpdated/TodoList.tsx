@@ -18,7 +18,7 @@ export const TodoList: React.FC<TodoListProps> = ({
         <TodoListItem
           key={todo.text}
           todo={todo}
-          toggleComplete={toggleComplete}
+          // toggleComplete={toggleComplete}
         />
       ))}
     </ul>

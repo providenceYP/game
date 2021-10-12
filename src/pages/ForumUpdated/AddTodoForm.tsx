@@ -21,13 +21,18 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addTodo }) => {
   return (
     <form>
       <input
-        className="border-2 border-gray-500 rounded-md"
+        className="border-2 border-gray-500 rounded-md w-80 h-20"
         type="text"
         value={newTodo}
         onChange={handleChange}
+        placeholder="     Введите комментарий"
       />
-      <button type="submit" onClick={handleSubmit}>
-        Add Todo
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        className="border-2 border-gray-500 bg-blue-200 rounded-md w-60 h-14 ml-2 p-4"
+      >
+        Добавить комментарий
       </button>
     </form>
   );

@@ -2,11 +2,19 @@ import { Todo } from './types';
 
 export const initialTodos: Array<Todo> = [
   {
-    text: 'Walk the dog',
-    complete: true,
+    text: 'Доработать интерфейс пользователя',
+    complete: false,
   },
   {
-    text: 'Make app',
+    text: 'Добавить предметы усиляющие игрока',
+    complete: false,
+  },
+  {
+    text: 'Когда появятся платные аватары?',
+    complete: false,
+  },
+  {
+    text: 'Когда появятся платные аватары?',
     complete: false,
   },
 ];
