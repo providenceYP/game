@@ -20,9 +20,7 @@ async function getTokenInfo() {
     { method: 'POST', headers, body, credentials: 'include' },
   );
 
-  const mediaType = response.headers.get('content-type');
-
-  if (mediaType.includes('json')) {
+  if (response.status === 200) {
     tokenData = await response.json();
   }
 
