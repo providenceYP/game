@@ -94,7 +94,7 @@ const Login: React.FC = (): JSX.Element => {
               Очистить
             </Button>,
             <Button
-              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white"
+              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white mt-10"
               key="redirect"
               onClick={getServiceId}
             >

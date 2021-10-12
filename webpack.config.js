@@ -3,6 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
+const Dotenv = require('dotenv-webpack');
 
 const commonConfig = {
   entry: './src/index.tsx',
@@ -60,7 +61,10 @@ const commonConfig = {
 
 const developmentConfig = {
   mode: 'development',
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  plugins: [
+    new Dotenv(),
+  ]
 };
 
 const productionConfig = {
@@ -69,7 +73,9 @@ const productionConfig = {
     clientsClaim: true,
     skipWaiting: true,
     maximumFileSizeToCacheInBytes: 40 * 1024 * 1024
-  })],
+  }),
+  new Dotenv(),
+],
   optimization: {
     minimize: true,
     minimizer: [
@@ -78,6 +84,13 @@ const productionConfig = {
       }),
     ],
   }
+};
+
+
+module.exports = {
+  plugins: [
+    new Dotenv()
+  ]
 };
 
 module.exports = (env, args) => {

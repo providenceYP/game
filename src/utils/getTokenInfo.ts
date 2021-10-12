@@ -12,7 +12,7 @@ async function getTokenInfo() {
 
   const body = JSON.stringify({
     code: queryCode,
-    redirect_uri: 'http://localhost:3000',
+    redirect_uri: `${process.env.REACT_REDIRECT_URL}`,
   });
 
   const response = await fetch(
