@@ -9,6 +9,7 @@ export class Tile extends Entity {
     y: number,
     public borderColor: string,
     public insideColor: string,
+    public lineWidth = 1,
   ) {
     super(ctx, x, y, width, height);
   }
@@ -16,16 +17,24 @@ export class Tile extends Entity {
   init(): void {}
 
   draw(): void {
-    const rect = new Path2D();
-
-    rect.rect(this.x, this.y, this.width, this.height);
-
     this.ctx.save();
-    this.ctx.fillStyle = this.insideColor;
-    this.ctx.strokeStyle = this.borderColor;
 
-    this.ctx.fill(rect);
-    this.ctx.stroke(rect);
+    this.ctx.fillStyle = this.borderColor;
+    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+    this.ctx.fillStyle = this.insideColor;
+    this.ctx.clearRect(
+      this.x + this.lineWidth,
+      this.y + this.lineWidth,
+      this.width - 2 * this.lineWidth,
+      this.height - 2 * this.lineWidth,
+    );
+    this.ctx.fillRect(
+      this.x + this.lineWidth,
+      this.y + this.lineWidth,
+      this.width - 2 * this.lineWidth,
+      this.height - 2 * this.lineWidth,
+    );
 
     this.ctx.restore();
   }
