@@ -6,9 +6,9 @@ export abstract class Entity extends Position implements Props {
 
   public readonly initialY: number;
 
-  public readonly centerX = this.width / 2;
+  public readonly centerX: number;
 
-  public readonly centerY = this.height / 2;
+  public readonly centerY: number;
 
   constructor(
     public ctx: CanvasRenderingContext2D,
@@ -21,6 +21,9 @@ export abstract class Entity extends Position implements Props {
 
     this.initialX = x;
     this.initialY = y;
+
+    this.centerX = this.width / 2;
+    this.centerY = this.height / 2;
   }
 
   abstract init(): void;

@@ -9,10 +9,11 @@ import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
   // TODO: убрать после добавления redux
-  const [players, setPlayers] = useState([
-    new Person('Jason'),
-    new Bot('Simon'),
-  ]);
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    setPlayers([new Person('Jason'), new Bot('Simon')]);
+  }, []);
 
   const makeHandleChangeStatus = (index: number) => () => {
     setPlayers((state) => {
@@ -79,7 +80,7 @@ export default function GameScreen() {
         ))}
       </div>
       <div className="self-start max-w-full xl:max-w-screen-lg">
-        <GameComponent players={players} />
+        {!!players.length && <GameComponent players={players} />}
       </div>
     </Layout>
   );

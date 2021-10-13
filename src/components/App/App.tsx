@@ -1,5 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
+
+import '../../styles/index.css';
 
 import {
   Main,
@@ -27,4 +30,4 @@ const App = (): JSX.Element => (
   </Switch>
 );
 
-export default App;
+export default hot(module)(App);

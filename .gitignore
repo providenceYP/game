@@ -3,5 +3,3 @@
 node_modules
 dist
 .eslintcache
-src/index.css
-www/index.css
