@@ -1,8 +1,4 @@
 async function getTokenInfo() {
-  const urlParams = new URLSearchParams(window.location.search);
-
-  const queryCode = urlParams.get('code');
-
   let tokenData;
 
   const headers = new Headers();
@@ -11,7 +7,7 @@ async function getTokenInfo() {
   headers.append('Content-Type', 'application/json');
 
   const body = JSON.stringify({
-    code: queryCode,
+    code: new URLSearchParams(window.location.search).get('code'),
     redirect_uri: `${process.env.REACT_REDIRECT_URL}`,
   });
 
