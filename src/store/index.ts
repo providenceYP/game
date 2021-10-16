@@ -1,15 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { PreloadedState } from 'redux';
+import { AuthState } from 'store/types';
 import auth from './slices/auth';
-
-type State = ReturnType<typeof store.getState>;
 
 const middlewareConfiguration = { serializableCheck: false };
 
-export const store = configureStore({
-  reducer: { auth },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware(middlewareConfiguration),
-});
+const reducer = { auth };
+type State = { auth?: AuthState };
+
+export default (initialStore?: PreloadedState<State>) =>
+  configureStore({
+    reducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware(middlewareConfiguration),
+    preloadedState: initialStore,
+  });
 
 export { State };

@@ -10,8 +10,6 @@ export class Monster extends Entity {
 
   private angryImage: HTMLImageElement;
 
-  public shown = false;
-
   public health: number;
 
   public readonly attack: number;

@@ -2,18 +2,23 @@ import React from 'react';
 import { Request, Response } from 'express';
 import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
+import { Provider } from 'react-redux';
+
 // import { getInitialState } from './store/getInitialState';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import App from 'components/App';
+import configureStore from 'store';
 
 import favicon from 'static/favicon.ico';
+import { renderObject } from 'utils/renderObject';
 
 function getPageHtml(params: {
   content: string;
   data?: Record<string, unknown>;
+  store?: ReturnType<typeof configureStore>;
 }) {
-  const { content } = params;
+  const { content, store } = params;
 
   const html = renderToStaticMarkup(
     <html lang="ru">
@@ -34,6 +39,15 @@ function getPageHtml(params: {
         </noscript>
 
         <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__PRELOADED_STATE__ = ${renderObject(
+              store.getState(),
+            )}`,
+          }}
+        />
+
         <script src="/main.js" />
       </body>
     </html>,
@@ -44,12 +58,14 @@ function getPageHtml(params: {
 export default (req: Request, res: Response) => {
   const location = req.url;
   const context: StaticRouterContext = {};
-  // const { store } = configureStore(getInitialState(location), location);
+  const store = configureStore({});
 
   const jsx = (
-    <StaticRouter context={context} location={location}>
-      <App />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter context={context} location={location}>
+        <App />
+      </StaticRouter>
+    </Provider>
   );
   const reactHtml = renderToString(jsx);
   // const reduxState = {};
@@ -61,5 +77,5 @@ export default (req: Request, res: Response) => {
 
   res
     .status(context.statusCode || 200)
-    .send(getPageHtml({ content: reactHtml }));
+    .send(getPageHtml({ content: reactHtml, store }));
 };
