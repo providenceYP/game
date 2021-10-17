@@ -21,7 +21,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addTodo }) => {
   return (
     <form>
       <input
-        className="border-2 border-gray-500 rounded-md w-80 h-20"
+        className="border-2 border-gray-500 rounded-md w-80 h-20 p-4"
         type="text"
         value={newTodo}
         onChange={handleChange}
