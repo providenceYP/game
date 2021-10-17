@@ -24,7 +24,7 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 
 базовые параметры игры расположены в src/logic/Game/Game.tsx
 
-    width - ширина игрового поля;
+  width - ширина игрового поля;
 	height - высота игрового поля;
 	startX - координата по оси X для игрового поля;
 	startY - координата по оси Y для игрового поля;
@@ -36,6 +36,6 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 
 # Скрипты
 * Установка – npm install
-* Запуск проекта – npm run dev
+* Запуск проекта – npm run start
 * Тесты (пока не добавлены) – npm run test
-* Сборка – npm run build
+* Запуск приложения для продакшена – npm run start:production

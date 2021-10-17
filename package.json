@@ -5,13 +5,11 @@
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve --config webpack/client.config.js",
-    "build": "rm -r ./dist || true && webpack --mode=production --config webpack/client.config.js",
-    "ssr": "webpack --mode=development && nodemon ./index.js",
     "clean": "rimraf dist",
     "start:webpack": "webpack",
     "start:server": "nodemon index.js --watch dist/server.js",
     "start": "cross-env NODE_ENV=development npm-run-all --print-label --parallel start:webpack start:server",
+    "start:production": "cross-env NODE_ENV=production npm-run-all --print-label --parallel start:webpack start:server",
     "sync": "npm prune && npm install",
     "lint": "lint-staged",
     "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"
@@ -108,13 +106,5 @@
   "lint-staged": {
     "*.json": "jsonlint",
     "*.{ts,tsx}": "eslint --quiet"
-  },
-  "betterScripts": {
-    "watch:ssr": {
-      "command": "webpack --watch --hide-modules --info-verbosity none --config webpack/config/ssr.config.ts",
-      "env": {
-        "NODE_ENV": "development"
-      }
-    }
   }
 }
