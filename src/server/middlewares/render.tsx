@@ -4,8 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 
-// import { getInitialState } from './store/getInitialState';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import App from 'components/App';
 import configureStore from 'store';
@@ -14,7 +13,7 @@ import favicon from 'static/favicon.ico';
 import { renderObject } from 'utils/renderObject';
 
 function getPageHtml(params: {
-  content: string;
+  content: JSX.Element;
   data?: Record<string, unknown>;
   store?: ReturnType<typeof configureStore>;
 }) {
@@ -38,7 +37,7 @@ function getPageHtml(params: {
           <strong>enable JS</strong> to make this app work.
         </noscript>
 
-        <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
+        <div id="app">{content}</div>
 
         <script
           dangerouslySetInnerHTML={{
@@ -60,22 +59,18 @@ export default (req: Request, res: Response) => {
   const context: StaticRouterContext = {};
   const store = configureStore({});
 
-  const jsx = (
+  const content = (
     <Provider store={store}>
       <StaticRouter context={context} location={location}>
         <App />
       </StaticRouter>
     </Provider>
   );
-  const reactHtml = renderToString(jsx);
-  // const reduxState = {};
 
   if (context.url) {
     res.redirect(context.url);
     return;
   }
 
-  res
-    .status(context.statusCode || 200)
-    .send(getPageHtml({ content: reactHtml, store }));
+  res.status(context.statusCode || 200).send(getPageHtml({ content, store }));
 };

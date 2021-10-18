@@ -3,8 +3,10 @@ import express, { RequestHandler } from 'express';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
+
 import clientConfig from '../../webpack/client.config';
-import serverConfig from '../../webpack/server.config';
+import { IS_DEV } from '../../webpack/env';
+
 import serverRenderMiddleware from './middlewares/render';
 
 const app = express();
@@ -24,10 +26,7 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get(
   '/*',
-  [
-    ...getWebpackMiddlewares(clientConfig),
-    ...getWebpackMiddlewares(serverConfig),
-  ],
+  IS_DEV ? getWebpackMiddlewares(clientConfig) : [],
   serverRenderMiddleware,
 );
 
