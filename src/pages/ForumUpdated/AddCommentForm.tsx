@@ -1,21 +1,23 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { AddTodo } from './types';
+import { AddComment } from './types';
 
-interface AddTodoFormProps {
-  addTodo: AddTodo;
+interface AddCommentFormProps {
+  addComment: AddComment;
 }
 
-export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addTodo }) => {
-  const [newTodo, setNewTodo] = useState<string>('');
+export const AddCommentForm: React.FC<AddCommentFormProps> = ({
+  addComment,
+}) => {
+  const [newComment, setNewComment] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTodo(e.target.value);
+    setNewComment(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    addTodo(newTodo);
-    setNewTodo('');
+    addComment(newComment);
+    setNewComment('');
   };
 
   return (
@@ -23,9 +25,9 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addTodo }) => {
       <input
         className="border-2 border-gray-500 rounded-md w-80 h-20 p-4"
         type="text"
-        value={newTodo}
+        value={newComment}
         onChange={handleChange}
-        placeholder="     Введите комментарий"
+        placeholder="Введите комментарий"
       />
       <button
         type="submit"

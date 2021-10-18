@@ -1,8 +1,7 @@
-export type Todo = {
+export type Comment = {
   text: string;
-  complete: boolean;
+  username: string;
+  date: string;
 };
 
-export type ToggleComplete = (selectedTodo: Todo) => void;
-
-export type AddTodo = (newTodo: string) => void;
+export type AddComment = (newComment: string) => void;

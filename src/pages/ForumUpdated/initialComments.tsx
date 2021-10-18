@@ -1,20 +1,24 @@
-import { Todo } from './types';
+import { Comment } from './types';
 
-export const initialTodos: Array<Todo> = [
+export const initialComments: Array<Comment> = [
   {
     text: 'Доработать интерфейс пользователя',
-    complete: false,
+    username: 'Mike',
+    date: '12/10/2021, 14:44:30',
   },
   {
     text: 'Добавить предметы усиляющие игрока',
-    complete: false,
+    username: 'Jason',
+    date: '14/10/2021, 14:44:30',
   },
   {
     text: 'Когда появятся платные аватары?',
-    complete: false,
+    username: 'Jack',
+    date: '16/10/2021, 14:44:30',
   },
   {
     text: 'Когда появятся платные аватары?',
-    complete: false,
+    username: 'Sam',
+    date: '17/10/2021, 14:44:30',
   },
 ];
