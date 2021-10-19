@@ -3,14 +3,12 @@ import { Entity } from 'logic/Entity/Entity';
 import { MonsterData } from 'utils/monsters';
 import { getRoundedRect } from 'utils/roundedRect';
 
-import angryImage from 'images/angry.png';
+import angryImage from 'static/images/angry.png';
 
 export class Monster extends Entity {
   private image: HTMLImageElement;
 
   private angryImage: HTMLImageElement;
-
-  public shown = false;
 
   public health: number;
 

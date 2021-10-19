@@ -30,7 +30,7 @@ export default class API {
 
       return response as AxiosResponse;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error as string);
     }
   }
 }

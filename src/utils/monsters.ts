@@ -1,7 +1,7 @@
-import monster1Image from 'images/monster1.png';
-import monster2Image from 'images/monster2.png';
-import monster3Image from 'images/monster3.png';
-import monster4Image from 'images/monster4.png';
+import monster1Image from 'static/images/monster1.png';
+import monster2Image from 'static/images/monster2.png';
+import monster3Image from 'static/images/monster3.png';
+import monster4Image from 'static/images/monster4.png';
 
 export type MonsterData = {
   name: string;

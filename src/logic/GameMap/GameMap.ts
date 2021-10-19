@@ -3,13 +3,13 @@ import { Tile } from '../Tile/Tile';
 export default class GameMap {
   public squareSize = 64;
 
-  public horizontalTilesQuantity = Math.floor(this.width / this.squareSize);
+  public horizontalTilesQuantity: number;
 
-  public verticalTilesQuantity = Math.floor(this.height / this.squareSize);
+  public verticalTilesQuantity: number;
 
-  public centerX = this.width / 2;
+  public centerX: number;
 
-  public centerY = this.height / 2;
+  public centerY: number;
 
   public readonly tiles: Tile[] = [];
 
@@ -17,7 +17,15 @@ export default class GameMap {
     private ctx: CanvasRenderingContext2D,
     private width: number,
     private height: number,
-  ) {}
+  ) {
+    this.horizontalTilesQuantity = Math.floor(this.width / this.squareSize);
+
+    this.verticalTilesQuantity = Math.floor(this.height / this.squareSize);
+
+    this.centerX = this.width / 2;
+
+    this.centerY = this.height / 2;
+  }
 
   init(): void {
     this.initTiles();
