@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout';
 import { initialComments } from './initialComments';
 import { CommentList } from './CommentList';
@@ -8,6 +8,20 @@ import { Comment, AddComment } from './types';
 
 const Forum: React.FC = () => {
   const [comments, setComments] = useState<Array<Comment>>(initialComments);
+	const getComments = async () => {
+		try {
+			const response = await fetch("http://localhost:5000/comments");
+			const jsonData = await response.json();
+			setComments(jsonData);
+			console.log(jsonData);
+		} catch (err) {
+			console.log(Error);
+		}
+	};
+
+	useEffect(() => {
+		getComments();
+	}, []);
 
   const addComment: AddComment = (newComment) => {
     newComment.trim() !== '' &&
