@@ -1,6 +1,6 @@
-CREATE DATABASE perntodo;
+CREATE DATABASE perncomment;
 
-CREATE TABLE todo(
-    todo_id SERIAL PRIMARY KEY,
+CREATE TABLE comment(
+    comment_id SERIAL PRIMARY KEY,
     description VARCHAR(255)
 );

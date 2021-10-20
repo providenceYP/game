@@ -18,72 +18,45 @@ const pgClient = new Pool({
 
 pgClient.on("connect", client => {
   client
-    .query("CREATE TABLE IF NOT EXISTS todo(todo_id SERIAL PRIMARY KEY,description VARCHAR(255));")
+    .query("CREATE TABLE IF NOT EXISTS comment(comment_id SERIAL PRIMARY KEY,description VARCHAR(255));")
     .catch(err => console.log("PG ERROR", err));
 });
 //Routes
 
 
-//create a todo
+//create a comment
 
-app.post("/todos", async (req, res) => {
+app.post("/comments", async (req, res) => {
     try {
         const { description } = req.body;
-        const newTodo = await pgClient.query("INSERT INTO todo (description) VALUES($1) RETURNING *",
+        const newComment = await pgClient.query("INSERT INTO comment (description) VALUES($1) RETURNING *",
             [description]
         );
 
-        res.json(newTodo.rows[0])
+        res.json(newComment.rows[0])
     } catch (err) {
         console.error(err.message);
     }
 });
 
-//get all todos
+//get all comments
 
-app.get("/todos", async (req, res) => {
+app.get("/comments", async (req, res) => {
     try {
-        const allTodos = await pgClient.query("SELECT * FROM todo")
-        res.json(allTodos.rows);
+        const allComments = await pgClient.query("SELECT * FROM comment")
+        res.json(allComments.rows);
     } catch (err) {
         console.error(err.message)
     }
 })
 
-//get a todo
+//delete a comment
 
-app.get("/todos/:id", async(req, res) => {
+app.delete("/comments/:id", async(req,res) =>{
     try {
         const { id } = req.params;
-        const todo = await pgClient.query("SELECT * FROM todo WHERE todo_id = $1", [id]);
-        res.json(todo.rows[0])
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-//update a todo
-
-app.put("/todos/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const { description } = req.body;
-        const updateTodo = await pgClient.query("UPDATE todo SET description = $1 WHERE todo_id = $2",
-        [description, id]);
-
-        res.json("Todo was updated")
-    } catch (err) {
-        console.error(err.message);
-    }
-})
-
-//delete a todo
-
-app.delete("/todos/:id", async(req,res) =>{
-    try {
-        const { id } = req.params;
-        const deleteTodo = await pgClient.query("DELETE FROM todo WHERE todo_id = $1", [id]);
-        res.json("Todo was deleted")
+        const deleteComment = await pgClient.query("DELETE FROM comment WHERE comment_id = $1", [id]);
+        res.json("Comment was deleted")
     } catch (err) {
         console.error(err.message);
     }

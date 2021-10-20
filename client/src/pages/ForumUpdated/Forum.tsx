@@ -8,16 +8,18 @@ import { Comment, AddComment } from './types';
 
 const Forum: React.FC = () => {
   const [comments, setComments] = useState<Array<Comment>>(initialComments);
-	const getComments = async () => {
-		try {
-			const response = await fetch("http://localhost:5000/comments");
-			const jsonData = await response.json();
-			setComments(jsonData);
-			console.log(jsonData);
-		} catch (err) {
-			console.log(Error);
-		}
-	};
+
+  const getComments = async () => {
+    try {
+
+        const response = await fetch("/api/comments")
+        const jsonData = await response.json()
+
+        setComments(jsonData)
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 	useEffect(() => {
 		getComments();
