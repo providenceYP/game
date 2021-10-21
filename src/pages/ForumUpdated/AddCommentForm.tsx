@@ -14,23 +14,27 @@ export const AddCommentForm: React.FC<AddCommentFormProps> = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewComment(e.target.value);
-    setDescription({text: e.target.value, username: 'Joe', date: (new Date()).toLocaleString() });
+    setDescription({
+      text: e.target.value,
+      username: 'Joe',
+      date: new Date().toLocaleString(),
+    });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const body = { description } ;
-      const response = await fetch("/api/comments",{
-          method: "POST",
-          headers: {"Content-Type" : "application/json"},
-          body: JSON.stringify(body)
+      const body = { description };
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
       });
       console.log(response);
-      window.location.href = "/forum";
-  } catch (err) {
-      console.error(err)
-  }
+      window.location.href = '/forum';
+    } catch (err) {
+      console.error(err);
+    }
     addComment(newComment);
     setNewComment('');
   };

@@ -33,7 +33,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     build:
       dockerfile: Dockerfile.dev
-      context: ./client
+      context: ./
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - /app
