@@ -8,7 +8,7 @@ async function getTokenInfo() {
 
   const body = JSON.stringify({
     code: new URLSearchParams(window.location.search).get('code'),
-    redirect_uri: `${process.env.REACT_REDIRECT_URL}`,
+    redirect_uri: `${process.env.REDIRECT_URL}`,
   });
 
   const response = await fetch(

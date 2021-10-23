@@ -12,6 +12,7 @@ async function getAuthData() {
 
   if (mediaType.includes('json')) {
     const authData = await response.json();
+
     localStorage.setItem('username', authData.first_name);
   }
 }

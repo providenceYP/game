@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import Layout from 'components/Layout';
 import Image from 'components/Image';
 import mainImage from 'images/main.jpeg';
+
 import getTokenInfo from 'utils/getTokenInfo';
 import getAuthData from 'utils/getAuthData';
 
 export default function Main() {
   useEffect(() => {
-    async function oauthStart() {
+    async function processOAuth() {
       await getTokenInfo();
       await getAuthData();
     }
-    oauthStart();
+    processOAuth();
   }, []);
 
   return (

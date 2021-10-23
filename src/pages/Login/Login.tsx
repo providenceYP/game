@@ -17,8 +17,6 @@ import { loginUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
 import { UserLogin } from 'types/user';
 
-import getServiceId from 'utils/getServiceId';
-
 const Login: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,6 +33,19 @@ const Login: React.FC = (): JSX.Element => {
       history.push('/');
     }
   }, [status, history]);
+
+  async function oathRedirectAction() {
+    const response = await fetch(
+      `https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=${process.env.REDIRECT_URL}`,
+      { method: 'GET', credentials: 'include' },
+    );
+
+    if (response.status === 200) {
+      const serviceId = await response.json();
+
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${process.env.REDIRECT_URL}`;
+    }
+  }
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -96,7 +107,7 @@ const Login: React.FC = (): JSX.Element => {
             <Button
               className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white mt-10"
               key="redirect"
-              onClick={getServiceId}
+              onClick={oathRedirectAction}
             >
               OAuth Yandex
             </Button>,
