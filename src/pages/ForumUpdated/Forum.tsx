@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Layout from 'components/Layout';
 import { initialComments } from './initialComments';
 import { CommentList } from './CommentList';
@@ -11,29 +11,35 @@ const Forum: React.FC = () => {
 
   const getComments = async () => {
     try {
-
-        const response = await fetch("/api/comments")
-        const jsonData = await response.json()
-
-        setComments(jsonData)
+      const response = await fetch('/api/comments');
+      const jsonData = await response.json();
+      setComments(jsonData);
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
-}
-
-	useEffect(() => {
-		getComments();
-	}, []);
-
-  const addComment: AddComment = (newComment) => {
-    newComment.trim() !== '' &&
-      setComments([...comments, { text: newComment, username: 'Joe', date: (new Date()).toLocaleString() }]);
   };
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
+  const addComment: AddComment = useCallback(() => {
+    (newComment: string) => {
+      newComment.trim() !== '' &&
+        setComments([
+          ...comments,
+          {
+            text: newComment,
+            username: 'Joe',
+            date: new Date().toLocaleString(),
+          },
+        ]);
+    };
+  }, [comments]);
 
   return (
     <Layout className="bg-gray-50">
-      <div className="">
-
+      <div>
         <CommentList comments={comments} />
         <AddCommentForm addComment={addComment} />
       </div>

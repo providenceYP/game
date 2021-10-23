@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { AddComment } from './types';
 
@@ -23,20 +24,22 @@ export const AddCommentForm: React.FC<AddCommentFormProps> = ({
 
   const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     try {
       const body = { description };
+
       const response = await fetch('/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      console.log(response);
-      window.location.href = '/forum';
+
+      // window.location.href = '/forum';
     } catch (err) {
       console.error(err);
     }
+
     addComment(newComment);
-    setNewComment('');
   };
 
   return (

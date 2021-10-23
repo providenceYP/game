@@ -14,7 +14,6 @@
     "target": "es5",
     "jsx": "react",
     "importHelpers": true,
-    "noUnusedLocals": true,
     "esModuleInterop": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -22,6 +21,7 @@
     "skipLibCheck": true,
     "strictNullChecks": false,
     "declaration": false,
+    "noUnusedLocals": false,
     "baseUrl": ".",
     "paths": {
       "*": ["*", "src/*", "www/*"]
