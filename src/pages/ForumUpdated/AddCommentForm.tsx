@@ -14,9 +14,11 @@ export const AddCommentForm: React.FC<AddCommentFormProps> = ({
   const [description, setDescription] = useState({});
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewComment(e.target.value);
+    const inputValue = e.target.value;
+
+    setNewComment(inputValue);
     setDescription({
-      text: e.target.value,
+      text: inputValue,
       username: 'Joe',
       date: new Date().toLocaleString(),
     });

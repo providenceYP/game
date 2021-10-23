@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React from 'react';
+
 import { Comment } from './types';
+
 import './CommentListItem.css';
 
 interface CommentListItemProps {
