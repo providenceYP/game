@@ -23,7 +23,20 @@ const Forum: React.FC = () => {
     getComments();
   }, []);
 
-  const addComment: AddComment = useCallback(() => {
+  // const addComment: AddComment = (newComment) => {
+  //   newComment.trim() !== '' &&
+  //     setComments([
+  //       ...comments,
+  //       {
+  //         text: newComment,
+  //         username: 'Joe',
+  //         date: new Date().toLocaleString(),
+  //       },
+  //     ]);
+  //     console.log(comments);
+  // };
+
+  const addComment: AddComment = useCallback(
     (newComment: string) => {
       newComment.trim() !== '' &&
         setComments([
@@ -34,8 +47,9 @@ const Forum: React.FC = () => {
             date: new Date().toLocaleString(),
           },
         ]);
-    };
-  }, [comments]);
+    },
+    [comments],
+  );
 
   return (
     <Layout className="bg-gray-50">
