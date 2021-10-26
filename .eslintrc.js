@@ -24,6 +24,8 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   rules: {
+    "@typescript-eslint/no-unused-vars": "warn",
+    'react/prop-types': 'off',
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
