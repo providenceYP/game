@@ -18,7 +18,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: user/app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/default:latest
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
