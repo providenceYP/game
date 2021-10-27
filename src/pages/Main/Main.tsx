@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import Layout from 'components/Layout';
 import Image from 'components/Image';
-import mainImage from 'images/main.jpeg';
+
+import mainImage from 'static/images/main.jpeg';
 
 import getTokenInfo from 'utils/getTokenInfo';
 import getAuthData from 'utils/getAuthData';

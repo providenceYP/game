@@ -24,18 +24,20 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 
 базовые параметры игры расположены в src/logic/Game/Game.tsx
 
-    width - ширина игрового поля;
-    height - высота игрового поля;
-    startX - координата по оси X для игрового поля;
-    startY - координата по оси Y для игрового поля;
-    squareSize - ширина базового квадрата-ячейки;
-    squareInnerSize - определяет ширину незакрашенной внутренней части;
-    horizontalTilesQuantity - количество шагов по горизонтали;
-    verticalTilesQuantity - количество шагов по вертикали;
+* width - ширина игрового поля;
+* startX - координата по оси X для игрового поля;
+* startY - координата по оси Y для игрового поля;
+* squareSize - ширина базового квадрата-ячейки;
+* squareInnerSize - определяет ширину незакрашенной внутренней части;
+* horizontalTilesQuantity - количество шагов по горизонтали;
+* verticalTilesQuantity - количество шагов по вертикали;
+
 
 # Скрипты
-
-- Установка – npm install
-- Запуск проекта в dev версии – npm run dev
-- Сборка – npm run build
-- Запуск контейнера с PSQL и сервером - docker-compose up --build
+* Установка – npm install
+* Запуск проекта – npm run start
+* Тесты (пока не добавлены) – npm run test
+* Запуск проекта в dev версии – npm run start
+* Сборка – npm run build
+* Запуск собранного приложения – npm run start:build
+* Запуск контейнера с PSQL и сервером - docker-compose up --build

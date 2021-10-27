@@ -3,24 +3,27 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'components/App';
-import { store } from 'store';
+import configureStore, { State } from 'store';
 
-import './styles/index.css';
+declare global {
+  interface Window {
+    __PRELOADED_STATE__: State;
+  }
+}
 
-const MOUNT_NODE = document.getElementById('app');
+const state = window.__PRELOADED_STATE__;
+const store = configureStore(state);
+const mountNode = document.getElementById('app');
 
-const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>,
-    MOUNT_NODE,
-  );
-};
+const Root = () => (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+);
 
-render();
+ReactDOM.hydrate(<Root />, mountNode);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

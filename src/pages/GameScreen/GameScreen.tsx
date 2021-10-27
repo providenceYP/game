@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from 'components/Layout';
 import PlayerCard from 'components/PlayerCard';
@@ -9,11 +9,19 @@ import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
   const username = localStorage.getItem('username');
-  // TODO: убрать после добавления redux
-  const [players, setPlayers] = useState([
-    new Person(username || 'Jason'),
-    new Bot('Simon'),
-  ]);
+  const [players, setPlayers] = useState([]);
+
+  const handleChangeHealth = () => {
+    setPlayers((state) => [...state]);
+  };
+
+  useEffect(() => {
+    // TODO: убрать после добавления redux
+    setPlayers([
+      new Person(username || 'Jason', handleChangeHealth),
+      new Bot('Simon', handleChangeHealth),
+    ]);
+  }, []);
 
   const makeHandleChangeStatus = (index: number) => () => {
     setPlayers((state) => {
@@ -23,6 +31,43 @@ export default function GameScreen() {
       return newPlayers;
     });
   };
+
+  useEffect(() => {
+    const [activatedPlayers, sleepingPlayers] = players.reduce(
+      (memo, { isReady, name }) => {
+        if (isReady) {
+          memo[0].push(name);
+        } else {
+          memo[1].push(name);
+        }
+
+        return memo;
+      },
+      [[], []] as string[][],
+    );
+
+    if (sleepingPlayers.length) {
+      if ('Notification' in window) {
+        const createNotification = () => {
+          const playerNames = activatedPlayers.join(', ');
+          const verb = activatedPlayers.length === 1 ? 'has' : 'have';
+          const text = `${playerNames} ${verb} already joined the game. Come on with us!`;
+
+          return new Notification(text);
+        };
+
+        if (Notification.permission === 'granted') {
+          createNotification();
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission((permission) => {
+            if (permission === 'granted') {
+              createNotification();
+            }
+          });
+        }
+      }
+    }
+  }, [players]);
 
   return (
     <Layout className="p-10 overflow-x-auto flex-wrap xl:flex-nowrap">
@@ -42,9 +87,14 @@ export default function GameScreen() {
           />
         ))}
       </div>
-      <div className="self-start max-w-full xl:max-w-screen-lg">
-        <GameComponent players={players} />
-      </div>
+      {!!players.length && (
+        <div className="self-start max-w-full xl:max-w-screen-lg">
+          <GameComponent
+            players={players}
+            onChangeHealth={handleChangeHealth}
+          />
+        </div>
+      )}
     </Layout>
   );
 }

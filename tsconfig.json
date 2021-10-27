@@ -9,9 +9,9 @@
       "dom",
       "es2017"
     ],
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "esnext",
     "jsx": "react",
     "importHelpers": true,
     "esModuleInterop": true,
@@ -24,12 +24,14 @@
     "noUnusedLocals": false,
     "baseUrl": ".",
     "paths": {
-      "*": ["*", "src/*", "www/*"]
+      "*": ["*", "src/*"]
     }
   },
   "include": [
     "src",
     "typings/**/*.d.ts",
-    "./node_modules/@types"
+    "./node_modules/@types",
+    "webpack",
+    "webpack.config.ts"
   ]
 }
