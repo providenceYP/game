@@ -26,4 +26,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           passphrase: ${{ secrets.KEY_PASSPHRASE }}
-          script: cd app && sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest && (sudo docker stop game && sudo docker rm game || true) && sudo docker run -p 80:8080 -d --name game ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest && sudo docker image prune -f --filter "label=${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
+          script: cd app && sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest && (sudo docker stop game && sudo docker rm game || true) && sudo docker run -p 80:8080 -d --name game ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest && sudo docker image prune -f
