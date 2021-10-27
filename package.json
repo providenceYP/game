@@ -6,11 +6,11 @@
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --mode=production",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack",
+    "start:build": "cross-env NODE_ENV=production nodemon index.js",
     "start:webpack": "webpack",
     "start:server": "nodemon index.js --watch dist/server.js",
     "start": "cross-env NODE_ENV=development npm-run-all --print-label --parallel start:webpack start:server",
-    "start:production": "cross-env NODE_ENV=production npm-run-all --print-label --parallel start:webpack start:server",
     "sync": "npm prune && npm install",
     "lint": "lint-staged",
     "lint:fix": "eslint --quiet --fix --ext ts,tsx -- './'"
