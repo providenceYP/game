@@ -5,3 +5,4 @@ dist
 .eslintcache
 src/index.css
 www/index.css
+.env

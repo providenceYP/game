@@ -23,19 +23,6 @@ const Forum: React.FC = () => {
     getComments();
   }, []);
 
-  // const addComment: AddComment = (newComment) => {
-  //   newComment.trim() !== '' &&
-  //     setComments([
-  //       ...comments,
-  //       {
-  //         text: newComment,
-  //         username: 'Joe',
-  //         date: new Date().toLocaleString(),
-  //       },
-  //     ]);
-  //     console.log(comments);
-  // };
-
   const addComment: AddComment = useCallback(
     (newComment: string) => {
       newComment.trim() !== '' &&
