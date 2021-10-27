@@ -37,7 +37,7 @@ https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3
 * Установка – npm install
 * Запуск проекта – npm run start
 * Тесты (пока не добавлены) – npm run test
-* Запуск приложения для продакшена – npm run start:production
 * Запуск проекта в dev версии – npm run start
 * Сборка – npm run build
+* Запуск собранного приложения – npm run start:build
 * Запуск контейнера с PSQL и сервером - docker-compose up --build
