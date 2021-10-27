@@ -1,5 +1,7 @@
 name: Push to registry
-on: [push]
+on:
+  push:
+    branches: ["main"]
 jobs:
   push-docker-image:
     name: Push Docker image to Docker Hub
