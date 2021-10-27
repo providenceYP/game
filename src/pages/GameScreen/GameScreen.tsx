@@ -8,9 +8,10 @@ import { Person } from 'logic/Person/Person';
 import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
+  const username = localStorage.getItem('username');
   // TODO: убрать после добавления redux
   const [players, setPlayers] = useState([
-    new Person('Jason'),
+    new Person(username || 'Jason'),
     new Bot('Simon'),
   ]);
 

@@ -34,6 +34,19 @@ const Login: React.FC = (): JSX.Element => {
     }
   }, [status, history]);
 
+  async function oathRedirectAction() {
+    const response = await fetch(
+      `https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=${process.env.REDIRECT_URL}`,
+      { method: 'GET', credentials: 'include' },
+    );
+
+    if (response.status === 200) {
+      const serviceId = await response.json();
+
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${process.env.REDIRECT_URL}`;
+    }
+  }
+
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
@@ -90,6 +103,13 @@ const Login: React.FC = (): JSX.Element => {
               type="reset"
             >
               Очистить
+            </Button>,
+            <Button
+              className="text-base font-medium rounded-lg p-2 bg-yellow-300 text-white mt-10"
+              key="redirect"
+              onClick={oathRedirectAction}
+            >
+              OAuth Yandex
             </Button>,
           ]}
         >
