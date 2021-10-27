@@ -2,6 +2,7 @@ import path from 'path';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
+import Dotenv from 'dotenv-webpack';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 
@@ -45,6 +46,7 @@ const config: webpack.Configuration = {
   devtool: 'source-map',
   optimization: { nodeEnv: false },
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
+  plugins: [new Dotenv()],
 };
 
 export default config;

@@ -2,18 +2,17 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { Pool } = require('pg');
-const keys = require('./keys');
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
 const pgClient = new Pool({
-  user: keys.pgUser,
-  host: keys.pgHost,
-  database: keys.pgDatabase,
-  password: keys.pgPassword,
-  port: keys.pgPort,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
 pgClient.on('connect', (client) => {

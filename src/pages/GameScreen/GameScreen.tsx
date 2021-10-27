@@ -4,11 +4,11 @@ import Layout from 'components/Layout';
 import PlayerCard from 'components/PlayerCard';
 import GameComponent from 'components/Game';
 
-// import { Person } from 'logic/Person/Person';
+import { Person } from 'logic/Person/Person';
 import { Bot } from 'logic/Bot/Bot';
 
 export default function GameScreen() {
-  // TODO: убрать после добавления redux
+  const username = localStorage.getItem('username');
   const [players, setPlayers] = useState([]);
 
   const handleChangeHealth = () => {
@@ -16,8 +16,9 @@ export default function GameScreen() {
   };
 
   useEffect(() => {
+    // TODO: убрать после добавления redux
     setPlayers([
-      new Bot('Jason', handleChangeHealth),
+      new Person(username || 'Jason', handleChangeHealth),
       new Bot('Simon', handleChangeHealth),
     ]);
   }, []);

@@ -3,6 +3,7 @@ import { GenerateSW } from 'workbox-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import * as webpack from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 
@@ -52,6 +53,7 @@ const config: webpack.Configuration = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
   plugins: [
+    new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
     !IS_DEV &&
       new GenerateSW({

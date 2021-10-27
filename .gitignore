@@ -4,3 +4,6 @@ node_modules
 dist
 .eslintcache
 .ssh
+src/index.css
+www/index.css
+.env
