@@ -25,6 +25,8 @@ const Root = () => (
 
 ReactDOM.hydrate(<Root />, mountNode);
 
+mountNode.style.display = 'block';
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker

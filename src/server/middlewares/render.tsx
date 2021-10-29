@@ -37,7 +37,9 @@ function getPageHtml(params: {
           <strong>enable JS</strong> to make this app work.
         </noscript>
 
-        <div id="app">{content}</div>
+        <div id="app" style={{ display: 'none' }}>
+          {content}
+        </div>
 
         <script
           dangerouslySetInnerHTML={{
