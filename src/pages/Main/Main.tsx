@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { getUser } from 'store/slices/auth';
 
 import Layout from 'components/Layout';
 import Image from 'components/Image';
@@ -7,14 +10,20 @@ import Image from 'components/Image';
 import mainImage from 'static/images/main.jpeg';
 
 import getTokenInfo from 'utils/getTokenInfo';
-import getAuthData from 'utils/getAuthData';
 
 export default function Main() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   useEffect(() => {
     async function processOAuth() {
-      await getTokenInfo();
-      await getAuthData();
+      const res = await getTokenInfo(history);
+
+      if (res) {
+        dispatch(getUser());
+      }
     }
+
     processOAuth();
   }, []);
 

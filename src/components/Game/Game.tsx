@@ -1,20 +1,32 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Game from 'logic/Game/Game';
+import { Player } from 'logic/Player/Player';
+import { addToLeaderboard } from 'store/slices/leaderboard';
+import { PlayerType } from 'pages/GameScreen/types';
 
 import Button from 'components/Button';
 import Timer from 'components/Timer';
 
 import { Props, Status } from './types';
 
-function GameComponent({ players }: Props) {
+function GameComponent({ players, user }: Props) {
   const [status, setStatus] = useState(Status.pause);
   const canvas = useRef<HTMLCanvasElement>();
   const game = useRef<Game>(null);
+  const dispatch = useDispatch();
 
-  const onEndGame = useCallback(() => {
-    setStatus(Status.ended);
-  }, []);
+  const onEndGame = useCallback(
+    (player: Player) => {
+      if (player.type === PlayerType.player) {
+        dispatch(addToLeaderboard({ user, health: player.health }));
+      }
+
+      setStatus(Status.ended);
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     game.current = new Game(canvas.current);

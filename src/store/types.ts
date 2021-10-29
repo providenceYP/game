@@ -2,13 +2,45 @@ import { AsyncThunk } from '@reduxjs/toolkit';
 
 type GenericAsyncThunk = AsyncThunk<unknown, unknown, unknown>;
 
-type PendingAction = ReturnType<GenericAsyncThunk['pending']>;
-type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>;
-type FulfilledAction = ReturnType<GenericAsyncThunk['fulfilled']>;
+export type PendingAction = ReturnType<GenericAsyncThunk['pending']>;
+export type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>;
+export type FulfilledAction = ReturnType<GenericAsyncThunk['fulfilled']>;
 
-type AuthState = {
+export type User = {
+  avatar?: string;
+  display_name: string;
+  email: string;
+  first_name: string;
+  id: number;
+  login: string;
+  phone?: string;
+  second_name: string;
+};
+
+export type AuthState = {
   loading: boolean;
+  status: string | null;
+  user?: User;
+};
+
+export type LeaderboardData = {
+  user: User;
+  health: number;
+};
+
+export type LeaderboardState = {
+  loading: boolean;
+  data: LeaderboardData[];
   status: string | null;
 };
 
-export { PendingAction, RejectedAction, FulfilledAction, AuthState };
+export enum Statuses {
+  OK = 'OK',
+  ERROR = 'ERROR',
+}
+
+export enum ActionTypes {
+  PENDING = '/pending',
+  REJECTED = '/rejected',
+  FULFILLED = '/fulfilled',
+}

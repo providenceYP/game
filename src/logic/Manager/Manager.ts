@@ -34,7 +34,7 @@ export default class Manager {
     private ctx: CanvasRenderingContext2D,
     private map: GameMap,
     private messenger: Messenger,
-    private onEndGame: () => void,
+    private onEndGame: (player: Player) => void,
     players: Player[],
   ) {
     this.playerObjects = players.map(
@@ -265,6 +265,6 @@ export default class Manager {
 
   end = (player: Player) => {
     this.update();
-    this.messenger.show(`${player.name} won!!!`, this.onEndGame);
+    this.messenger.show(`${player.name} won!!!`, () => this.onEndGame(player));
   };
 }

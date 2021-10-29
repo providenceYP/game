@@ -13,8 +13,9 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
-import { loginUser, Statuses } from 'store/slices/auth';
 import { State } from 'store';
+import { loginUser } from 'store/slices/auth';
+import { Statuses } from 'store/types';
 import { UserLogin } from 'types/user';
 
 const Login: React.FC = (): JSX.Element => {
@@ -29,14 +30,14 @@ const Login: React.FC = (): JSX.Element => {
   });
 
   useEffect(() => {
-    if (status === Statuses.OK) {
+    if (status === Statuses.OK && !loading) {
       history.push('/');
     }
   }, [status, history]);
 
   async function oathRedirectAction() {
     const response = await fetch(
-      `https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=${process.env.REDIRECT_URL}`,
+      `${process.env.BASE_API_URL}oauth/yandex/service-id/?redirect_uri=${process.env.REDIRECT_URL}`,
       { method: 'GET', credentials: 'include' },
     );
 
