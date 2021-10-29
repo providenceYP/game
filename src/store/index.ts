@@ -9,6 +9,7 @@ import leaderboard from './slices/leaderboard';
 const middlewareConfiguration = { serializableCheck: false };
 
 const reducer = { auth, leaderboard };
+
 type State = { auth?: AuthState; leaderboard?: LeaderboardState };
 
 export default (initialStore?: PreloadedState<State>) =>
