@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { State } from 'store';
+import { getLeaderboard } from 'store/slices/leaderboard';
+import { LeaderboardData } from 'store/types';
 
 import Avatar from 'components/Avatar';
 import Layout from 'components/Layout';
 import Table from 'components/Table';
 
-const users = new Array(10).fill({
-  avatar: null,
-  name: '123',
-  health: 15,
-});
-
 const Leaderboard = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const data = useSelector<State>(
+    (state) => state?.leaderboard?.data,
+  ) as LeaderboardData[];
+
+  useEffect(() => {
+    dispatch(
+      getLeaderboard({ ratingFieldName: 'health', limit: 10, cursor: 0 }),
+    );
+  }, [dispatch]);
+
   const headers = ['№', 'Аватар', 'Имя', 'Здоровье'];
-  const rows = users.map(({ avatar, name, health }, index) => [
-    index + 1,
-    <Avatar imageSrc={avatar} />,
-    name,
-    health,
-  ]);
+  const rows =
+    data?.map(({ user: { avatar, display_name }, health }, index) => [
+      index + 1,
+      <Avatar imageSrc={avatar} />,
+      display_name,
+      health,
+    ]) || [];
 
   return (
     <Layout>

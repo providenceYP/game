@@ -46,7 +46,9 @@ const config: webpack.Configuration = {
   devtool: 'source-map',
   optimization: { nodeEnv: false },
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv({ path: `./.env.${process.env.NODE_ENV}`, defaults: true }),
+  ],
 };
 
 export default config;

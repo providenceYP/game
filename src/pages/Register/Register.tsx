@@ -13,7 +13,8 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Layout from 'components/Layout';
 
-import { registerUser, Statuses } from 'store/slices/auth';
+import { registerUser } from 'store/slices/auth';
+import { Statuses } from 'store/types';
 import { State } from 'store';
 import { UserRegister } from 'types/user';
 

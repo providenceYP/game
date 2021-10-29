@@ -6,22 +6,27 @@ import GameComponent from 'components/Game';
 
 import { Person } from 'logic/Person/Person';
 import { Bot } from 'logic/Bot/Bot';
+import { useSelector } from 'react-redux';
+
+import { State } from 'store';
+import { User } from 'src/store/types';
 
 export default function GameScreen() {
-  const username = localStorage.getItem('username');
   const [players, setPlayers] = useState([]);
+  const user = useSelector<State>((state) => state.auth.user) as User;
 
   const handleChangeHealth = () => {
     setPlayers((state) => [...state]);
   };
 
   useEffect(() => {
-    // TODO: убрать после добавления redux
-    setPlayers([
-      new Person(username || 'Jason', handleChangeHealth),
-      new Bot('Simon', handleChangeHealth),
-    ]);
-  }, []);
+    if (user?.first_name) {
+      setPlayers([
+        new Person(user.first_name, handleChangeHealth),
+        new Bot('Simon', handleChangeHealth),
+      ]);
+    }
+  }, [user?.first_name]);
 
   const makeHandleChangeStatus = (index: number) => () => {
     setPlayers((state) => {
@@ -92,6 +97,7 @@ export default function GameScreen() {
           <GameComponent
             players={players}
             onChangeHealth={handleChangeHealth}
+            user={user}
           />
         </div>
       )}

@@ -1,5 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { State } from 'store';
+import { User } from 'store/types';
 
 import Button from 'components/Button';
 import Logo from 'components/Logo';
@@ -22,6 +26,7 @@ const links = [
 
 export const Navbar: React.FC = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
+  const user = useSelector<State>((state) => state.auth.user) as User;
 
   const toggle = useCallback(() => {
     setIsVisible((state: boolean) => !state);
@@ -65,20 +70,32 @@ export const Navbar: React.FC = (): JSX.Element => {
             </div>
             <div className="items-center md:flex">
               <div className="flex flex-col md:flex-row md:mx-6">
-                <NavLink
-                  to="/login"
-                  className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
-                  activeClassName="text-blue-700"
-                >
-                  Вход
-                </NavLink>
-                <NavLink
-                  to="/register"
-                  className="bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
-                  activeClassName="text-blue-700"
-                >
-                  Регистрация
-                </NavLink>
+                {!user ? (
+                  <>
+                    <NavLink
+                      to="/login"
+                      className="bg-transparent font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                      activeClassName="text-blue-700"
+                    >
+                      Вход
+                    </NavLink>
+                    <NavLink
+                      to="/register"
+                      className="bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                      activeClassName="text-blue-700"
+                    >
+                      Регистрация
+                    </NavLink>
+                  </>
+                ) : (
+                  <NavLink
+                    to="/logout"
+                    className="bg-white font-medium uppercase px-4 py-2 rounded text-xs my-1 md:mr-1 md:my-0 hover:bg-blue-700 hover:text-white"
+                    activeClassName="text-blue-700"
+                  >
+                    Выход
+                  </NavLink>
+                )}
               </div>
             </div>
           </>

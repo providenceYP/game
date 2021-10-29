@@ -13,44 +13,34 @@ import {
   RejectedAction,
   FulfilledAction,
   AuthState,
+  Statuses,
+  ActionTypes,
 } from 'store/types';
 
-export enum Statuses {
-  OK = 'OK',
-  ERROR = 'ERROR',
-}
-
-export enum ActionTypes {
-  PENDING = '/pending',
-  REJECTED = '/rejected',
-  FULFILLED = '/fulfilled',
-}
-
-const initialState: AuthState = { loading: false, status: null };
+const initialState: AuthState = { loading: false, status: null, user: null };
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (user: UserLogin) => {
-    try {
-      await API.createRequest('login', user as UserLoginDTO);
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  async (user: UserLogin) => API.createRequest('login', user as UserLoginDTO),
 );
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (user: UserRegister) => {
-    try {
-      await API.createRequest(
-        'register',
-        transformObjectToCase(user, snakelize) as UserRegisterDTO,
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  async (user: UserRegister) =>
+    API.createRequest(
+      'register',
+      transformObjectToCase(user, snakelize) as UserRegisterDTO,
+    ),
+);
+
+export const getUser = createAsyncThunk('auth/getUser', async () => {
+  const response = await API.createRequest('user');
+
+  return response.data;
+});
+
+export const logoutUser = createAsyncThunk('auth/logoutUser', async () =>
+  API.createRequest('logout'),
 );
 
 const slice = createSlice({
@@ -58,6 +48,18 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getUser.fulfilled, (state, action) => ({
+      loading: false,
+      status: Statuses.OK,
+      user: action.payload,
+    }));
+
+    builder.addCase(logoutUser.fulfilled, () => ({
+      loading: false,
+      status: Statuses.OK,
+      user: null,
+    }));
+
     builder
       .addMatcher<PendingAction>(
         (action: { type: string }) => action.type.endsWith(ActionTypes.PENDING),
@@ -66,7 +68,8 @@ const slice = createSlice({
       .addMatcher<RejectedAction>(
         (action: { type: string }) =>
           action.type.endsWith(ActionTypes.REJECTED),
-        () => ({
+        (state) => ({
+          ...state,
           loading: false,
           status: Statuses.ERROR,
         }),
@@ -74,7 +77,8 @@ const slice = createSlice({
       .addMatcher<FulfilledAction>(
         (action: { type: string }) =>
           action.type.endsWith(ActionTypes.FULFILLED),
-        () => ({
+        (state) => ({
+          ...state,
           loading: false,
           status: Statuses.OK,
         }),

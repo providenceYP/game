@@ -53,7 +53,7 @@ const config: webpack.Configuration = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({ path: `./.env.${process.env.NODE_ENV}`, defaults: true }),
     new webpack.HotModuleReplacementPlugin(),
     !IS_DEV &&
       new GenerateSW({

@@ -15,8 +15,8 @@ export default class API {
 
   async createRequest(
     requestName: string,
-    data: Record<string, unknown>,
-  ): Promise<AxiosResponse | void> {
+    data?: Record<string, unknown>,
+  ): Promise<AxiosResponse | never> {
     const request = this.requests[requestName];
 
     if (!request) {

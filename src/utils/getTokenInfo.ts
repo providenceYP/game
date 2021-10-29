@@ -1,26 +1,36 @@
-async function getTokenInfo() {
-  let tokenData;
+import { History } from 'history';
 
-  const headers = new Headers();
+async function getTokenInfo(history: History) {
+  const query = new URLSearchParams(window.location.search);
+  const code = query.get('code');
 
-  headers.append('accept', 'application/json');
-  headers.append('Content-Type', 'application/json');
+  if (code) {
+    const headers = new Headers();
 
-  const body = JSON.stringify({
-    code: new URLSearchParams(window.location.search).get('code'),
-    redirect_uri: `${process.env.REDIRECT_URL}`,
-  });
+    headers.append('accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
 
-  const response = await fetch(
-    'https://ya-praktikum.tech/api/v2/oauth/yandex',
-    { method: 'POST', headers, body, credentials: 'include' },
-  );
+    const body = JSON.stringify({
+      code,
+      redirect_uri: `${process.env.REDIRECT_URL}`,
+    });
 
-  if (response.status === 200) {
-    tokenData = await response.json();
+    const response = await fetch(`${process.env.BASE_API_URL}oauth/yandex`, {
+      method: 'POST',
+      headers,
+      body,
+      credentials: 'include',
+    });
+    if (response.status === 200) {
+      query.delete('code');
+
+      history.replace({ ...history.location, search: query.toString() });
+    }
+
+    return response.ok;
   }
 
-  return tokenData;
+  return false;
 }
 
 export default getTokenInfo;

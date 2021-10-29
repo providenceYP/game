@@ -18,13 +18,13 @@ export default class Game {
 
   private manager: Manager;
 
-  private onEndGame: () => void;
+  private onEndGame: (player: Player) => void;
 
   constructor(protected canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d');
   }
 
-  init(players: Player[], onEndGame: () => void): void {
+  init(players: Player[], onEndGame: (player: Player) => void): void {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.onEndGame = onEndGame;
@@ -52,9 +52,9 @@ export default class Game {
     this.manager.start();
   }
 
-  end = () => {
+  end = (player: Player) => {
     this.started = false;
 
-    this.onEndGame();
+    this.onEndGame(player);
   };
 }
