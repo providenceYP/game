@@ -1,5 +1,7 @@
 # Battle Dice (Luck-based game)
 
+<img alt="image" src="gameplay.png"> </img>
+
 🕒 Average session 5-10 minutes
 
 Easy to learn 🟢
@@ -40,5 +42,3 @@ cd game
 ```
 docker-compose up --build
 ``
-
-
