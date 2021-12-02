@@ -1,43 +1,44 @@
-# game
+# Battle Dice (Luck-based game)
 
-https://miro.com/welcomeonboard/ckxMV3hJWk02OHdtWnVQZW81eUE2bGxLbDBZSUxFeVdUdDM3OFZqdlR5eTEyajA5MzdqbkY4UHBXYm9UbjFseHwzMDc0NDU3MzQ5MDY1MjA0NDM0
+🕒 Average session 5-10 minutes
 
-🕒 Время средней игры 5-10 минут
+Easy to learn 🟢
 
-Сложность для ознакомления низкая 🟢
+Setting - Sci-Fi (X-com) 👽
 
-Сеттинг - Sci-Fi (X-com) 👽
+Synopsis - you are a lone operative in the enemy territory. You must break through the crowds of enemies in order to kill your main enemy - your former partner.
 
-Синопсис - вы одинокий оперативник на вражеской территории. Вы дожлны прорваться через толпы врагов, чтобы убить вашего главного врага - бывшего напарника.
+The essence of the game is a dice roll 🎲 it determines how far you can run on your turn. Enemies 👾 and useful items🔫 will be randomly waiting for you on the cells.
 
-Суть игры - бросок кубика 🎲 определяет на сколько вы можете продвинуться в свой ход. На клетках вас могут поджидать враги 👾 и полезные предметы🔫.
+Each enemy has a number of lives ❤️ and an attack ⚔️. Attack shows how much the enemy reduces your life each turn. The number of lives shows you how many points after the roll of the die you need to score to kill the enemy.
 
-У каждого врага есть количество жизней ❤️ и атака ⚔️. Атака показывает на сколько враг уменьшает вам количество жизней каждый ход. Количество жизней показывает вам сколько очков после броска кубика нужно набрать чтобы убить врага.
+Items scattered randomly across the map can enhance your attack or restore life.
 
-Предеметы разбросанные случайно по карте могут усиливать вашу атаку или восстанавливать жизни.
+Each player starts with 100 lives ❤️ and the attack is equal to the number rolled on the dice. Items can increase attack, for example +2 pistol will make your attack on a roll of a 4 becomes 6.
 
-Каждый игрок начинает со 100 жизнями ❤️ и атака равна цифре выпавшей на кубике. Предметы могут увеличивать атаку, например пистолет +2 сделает вашу атаку при броске кубика на 4 станет 6.
-
-В конце игры вы встречаете своего заклятого врага - вашего бывшего напарника и должны победить его в честной битве - броском кубика.
-
-Конфигурация и параметры игры
-
-базовые параметры игры расположены в src/logic/Game/Game.tsx
-
-* width - ширина игрового поля;
-* startX - координата по оси X для игрового поля;
-* startY - координата по оси Y для игрового поля;
-* squareSize - ширина базового квадрата-ячейки;
-* squareInnerSize - определяет ширину незакрашенной внутренней части;
-* horizontalTilesQuantity - количество шагов по горизонтали;
-* verticalTilesQuantity - количество шагов по вертикали;
+At the end of the game, you will meet your nemesis - your former partner and you must defeat him in a fair battle - with a dice roll.
 
 
-# Скрипты
-* Установка – npm install
-* Запуск проекта – npm run start
-* Тесты (пока не добавлены) – npm run test
-* Запуск проекта в dev версии – npm run start
-* Сборка – npm run build
-* Запуск собранного приложения – npm run start:build
-* Запуск контейнера с PSQL и сервером - docker-compose up --build
+## How to run application
+
+> you need to have access to Yandex infrastructure to add matching api keys to .env, if you don't: you can just check the code
+
+1. Clone repository
+
+```
+git clone git@github.com:providenceYP/game.git
+```
+
+2. Go to folder
+
+```
+cd game
+```
+
+3. Install
+
+```
+docker-compose up --build
+``
+
+
