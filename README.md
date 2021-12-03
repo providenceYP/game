@@ -20,6 +20,19 @@ Each player starts with 100 lives ❤️ and the attack is equal to the number r
 
 At the end of the game, you will meet your nemesis - your former partner and you must defeat him in a fair battle - with a dice roll.
 
+## Tech stack
+
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Webpack](https://webpack.js.org/)
+- [Docker](https://www.docker.com/)
+- [Nginx](https://www.nginx.com/)
+- [Axios](https://github.com/axios/axios)
+- [lint-staged](https://github.com/okonet/lint-staged/)
+- [Prettier](https://prettier.io/)
+- [Eslint](https://eslint.org/)
+
 
 ## How to run application
 
